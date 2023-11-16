@@ -1,0 +1,12 @@
+{
+    "name": "jorge/htdocs",
+    "authors": [
+        {
+            "name": "Jorge Macias",
+            "email": "jorge.macias7905@alumnos.udg.mx"
+        }
+    ],
+    "require": {
+        "jenssegers/blade": "^1.4"
+    }
+}
