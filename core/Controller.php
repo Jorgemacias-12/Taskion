@@ -9,7 +9,17 @@ class Controller
 
   protected function view($view, $data = [])
   {
-    require_once '../views/' . $view . '.php';
+    $path = __DIR__ . '/../views/' . $view . '.php';
+
+    if (file_exists($path)) {
+      extract($data);
+
+      require_once $path;
+    }
+    else 
+    {
+      die("The view $view doesn't exist!");
+    }
   }
 
   protected function redirect($path)
