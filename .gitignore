@@ -27,3 +27,6 @@
 
 # Ignorar archivos de caché de Twig
 /var/cache/twig/
+
+# Ignorar carpeta cache que genera blade
+/cache
