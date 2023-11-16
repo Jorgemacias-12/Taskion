@@ -1,0 +1,9 @@
+# Activa el módulo de reescritura
+RewriteEngine On
+
+# Si una solicitud corresponde a un archivo o directorio real, sérvalo directamente
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Reescribe todas las demás solicitudes a index.php
+RewriteRule ^ index.php [QSA,L]
