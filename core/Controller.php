@@ -1,6 +1,19 @@
 <?php
+
+use Jenssegers\Blade\Blade;
+
 class Controller
 {
+  private $blade;
+
+  public function __construct() {
+
+    $views = __DIR__ . '/../views';
+    $cache = __DIR__ . '/../cache';
+
+    $this->blade = new Blade($views, $cache);
+  }
+
   protected function model($model)
   {
     require_once '../models/' . $model . '.php';
@@ -9,17 +22,7 @@ class Controller
 
   protected function view($view, $data = [])
   {
-    $path = __DIR__ . '/../views/' . $view . '.php';
-
-    if (file_exists($path)) {
-      extract($data);
-
-      require_once $path;
-    }
-    else 
-    {
-      die("The view $view doesn't exist!");
-    }
+    echo $this->blade->make($view, $data)->render();
   }
 
   protected function redirect($path)
