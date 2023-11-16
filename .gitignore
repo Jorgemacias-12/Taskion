@@ -1,0 +1,29 @@
+# Ignorar archivos de configuración de entorno
+/.env
+
+# Ignorar directorios de dependencias de Composer
+/vendor
+
+# Ignorar archivos de logs
+/log/
+*.log
+
+# Ignorar archivos de caché
+/var/cache/
+/var/logs/
+/var/sessions/
+
+# Ignorar archivos de configuración locales
+/config/packages/local/
+
+# Ignorar archivos de respaldo
+*.swp
+*~
+.DS_Store
+
+# Ignorar archivos generados por IDEs
+/.idea
+/.vscode
+
+# Ignorar archivos de caché de Twig
+/var/cache/twig/
