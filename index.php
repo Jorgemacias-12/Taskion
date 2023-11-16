@@ -1,29 +1,23 @@
 <?php
 
-// Carga el archivo de inicialización desde el directorio core
 require_once './core/init.php';
+$routes = require_once './routes/routes.php';
 
-// Aquí deberías crear lógica para manejar las solicitudes.
-// Una forma común es analizar la URL para determinar qué controlador y método llamar.
+// Obtén la URL o utiliza la ruta raíz como predeterminada
+$url = $_GET['url'] ?? '/';
+$url = rtrim($url, '/');
+$url = filter_var($url, FILTER_SANITIZE_URL);
 
-$url = $_GET['url'] ?? 'home/index'; // Establece una ruta predeterminada
-$url = explode('/', filter_var(rtrim($url, '/'), FILTER_SANITIZE_URL));
+// Resto del código de enrutamiento...
+if (array_key_exists($url, $routes)) {
+  $controllerName = $routes[$url]['controller'];
+  $methodName = $routes[$url]['method'];
 
-$controllerName = isset($url[0]) ? ucfirst($url[0]) . 'Controller' : 'HomeController';
-$method = isset($url[1]) ? $url[1] : 'index';
-
-// Asegúrate de que el controlador y el método existan
-if (file_exists("../controllers/{$controllerName}.php")) {
-  require_once "../controllers/{$controllerName}.php";
+  // Incluir el controlador y ejecutar el método
+  require_once "controllers/{$controllerName}.php";
   $controller = new $controllerName();
-
-  if (method_exists($controller, $method)) {
-    call_user_func_array([$controller, $method], array_slice($url, 2));
-  } else {
-    // Manejo del error: Método no encontrado
-    // Puedes redirigir a una página de error o mostrar un mensaje
-  }
+  $controller->{$methodName}();
 } else {
-  // Manejo del error: Controlador no encontrado
-  // Puedes redirigir a una página de error o mostrar un mensaje
+  // Ruta no encontrada
+  echo "404 - Página no encontrada";
 }
