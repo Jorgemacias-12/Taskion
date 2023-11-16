@@ -4,6 +4,8 @@
 require_once 'env_loader.php';
 loadEnvironmentVariables(__DIR__ . '/../.env');
 
+require_once __DIR__ . '/../vendor/autoload.php';
+
 // Autoload de clases
 spl_autoload_register(function ($className) {
   $corePath = __DIR__ . '/' . $className . '.php';
