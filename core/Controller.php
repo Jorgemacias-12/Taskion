@@ -20,7 +20,7 @@ class Controller
     return new $model();
   }
 
-  protected function view($view, $data = [])
+  public function view($view, $data = [])
   {
     echo $this->blade->make($view, $data)->render();
   }
