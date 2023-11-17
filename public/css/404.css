@@ -1,0 +1,35 @@
+:root {
+  --404-bg: #e4a9a9;
+  --404-fg: #a82525;
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
+.content {
+  padding: 1rem;
+  gap: 1rem;
+}
+
+.title {
+  text-align: center;
+  font-size: 4rem;
+}
+
+.trace {
+  font-size: 1.5rem;
+  background-color: var(--404-bg);
+  color: var(--404-fg);
+  padding: 1rem;
+}
+
+.cat {
+  display: block;
+  margin: 0 auto;
+  aspect-ratio: 16 / 9;
+  margin-top: 1rem;
+}
