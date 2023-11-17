@@ -19,5 +19,7 @@ if (array_key_exists($url, $routes)) {
   $controller->{$methodName}();
 } else {
   // Ruta no encontrada
-  echo "404 - Página no encontrada";
+  $controller = new Controller();
+  $controller->view('404', ['url' => $url, 'showHeader' => true]);
+  // echo "404 - Página no encontrada";
 }
