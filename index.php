@@ -3,23 +3,28 @@
 require_once './core/init.php';
 $routes = require_once './routes/routes.php';
 
-// Obtén la URL o utiliza la ruta raíz como predeterminada
+// Obtén la URL y el método HTTP
 $url = $_GET['url'] ?? '/';
 $url = rtrim($url, '/');
 $url = filter_var($url, FILTER_SANITIZE_URL);
+$method = $_SERVER['REQUEST_METHOD'];
 
 // Resto del código de enrutamiento...
-if (array_key_exists($url, $routes)) {
-  $controllerName = $routes[$url]['controller'];
-  $methodName = $routes[$url]['method'];
+if (array_key_exists($url, $routes) && array_key_exists($method, $routes[$url])) {
+  $route = $routes[$url][$method];
+  $controllerName = $route['controller'];
+  $methodName = $route['action'];
 
-  // Incluir el controlador y ejecutar el método
   require_once "controllers/{$controllerName}.php";
   $controller = new $controllerName();
-  $controller->{$methodName}();
+  if (method_exists($controller, $methodName)) {
+    $controller->{$methodName}();
+  } else {
+    // Método no encontrado en el controlador
+    $controller->view('404', ['url' => $url, 'showHeader' => true]);
+  }
 } else {
-  // Ruta no encontrada
+  // Ruta no encontrada o método no permitido
   $controller = new Controller();
   $controller->view('404', ['url' => $url, 'showHeader' => true]);
-  // echo "404 - Página no encontrada";
 }
