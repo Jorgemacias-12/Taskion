@@ -1,7 +1,10 @@
 # Activa el módulo de reescritura
 RewriteEngine On
 
-RewriteRule ^([a-zA-Z0-9_-]+)$ routes/$1.php [L]
+# Redirige todas las solicitudes al index.php, incluyendo la ruta como parámetro 'url'
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
 
 # DISABLE CACHING
 <IfModule mod_headers.c>
