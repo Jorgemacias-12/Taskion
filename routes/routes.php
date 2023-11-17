@@ -17,7 +17,7 @@ return [
     ],
     'POST' => [
       'controller' => 'AuthController',
-      'action' => 'postLogin',
+      'action' => 'doLogin',
       'method' => 'POST'
     ],
   ],
