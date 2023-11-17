@@ -2,7 +2,9 @@
   <section class="header-wrapper">
     <section class="brand-container">
       <picture class="brand-icon-wrapper">
-        <img src="https://via.placeholder.com/250x40" alt="" class="brand-icon">
+        <a href="/">
+          <img src="https://via.placeholder.com/250x40" alt="" class="brand-icon">
+        </a>
       </picture>
       <h1>Taskion</h1>
       <nav class="navigation">
