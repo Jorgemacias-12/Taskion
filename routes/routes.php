@@ -1,7 +1,10 @@
 <?php
 
 return [
-  '' => ['controller' => 'IndexController', 'method' => 'index'],
-  // '' => [],
+  '' => [
+    'controller' => 'IndexController',
+    'action' => 'index',
+    'method' => 'GET'
+  ]
 
 ];
