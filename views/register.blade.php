@@ -12,9 +12,12 @@
 
 @section('content')
 
-  @php
-    $oldInput = $oldInput ?? []; // Define $oldInput como un array vacío si no está definido previamente
-  @endphp
+  @if (isset($errors) && is_string($errors))
+    @php
+      $errors = unserialize($errors);
+      $oldInput = $oldInput ?? [];
+    @endphp
+  @endif
 
   <section class="container flex col">
     <h2 class="title">Registro</h2>
