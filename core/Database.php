@@ -2,10 +2,10 @@
 
 class Database
 {
-  private $servername = getenv("DB_HOST") ?? 'localhost';
-  private $username = getenv("DB_USERNAME") ?? "root";
+  private $servername;
+  private $username;
   private $password;
-  private $database = getenv("DB_DATABASE") ?? "taskion";
+  private $database;
   private $conn;
   private $options = [
     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
@@ -15,7 +15,11 @@ class Database
 
   public function __construct()
   {
+    $this->servername = getenv("DB_HOST") ?? 'localhost';
+    $this->username = getenv("DB_USERNAME") ?? "root";
     $this->password = getenv("DB_PASSWORD") !== false ? getenv("DB_PASSWORD") : '';
+    $this->database = getenv("DB_DATABASE") ?? "taskion";
+
     $dsn = "mysql:host={$this->servername};dbname={$this->database};charset=utf8mb4";
 
     try {
