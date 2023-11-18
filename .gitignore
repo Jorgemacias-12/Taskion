@@ -30,3 +30,6 @@
 
 # Ignorar carpeta cache que genera blade
 /cache
+
+# Ignorar archivos .bak
+*.bak
