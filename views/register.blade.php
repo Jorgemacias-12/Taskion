@@ -12,11 +12,9 @@
 
 @section('content')
 
-  @if (isset($errors) && is_string($errors))
-    @php
-      $errors = unserialize($errors);
-    @endphp
-  @endif
+  @php
+    $oldInput = $oldInput ?? []; // Define $oldInput como un array vacío si no está definido previamente
+  @endphp
 
   <section class="container flex col">
     <h2 class="title">Registro</h2>
@@ -25,7 +23,7 @@
     
     <section class="form-group">
       <label class='caption' for="name">Nombre</label>
-      <input class='input' type="text" name="name" id="name" value="{{ $oldInput['name'] }}">
+      <input class='input' type="text" name="name" id="name" value="{{ $oldInput['name'] ?? '' }}">
       @if (isset($errors) && $errors->has('name'))
         <p class="error">
           <span class="close fas fa-times"></span>
@@ -36,7 +34,7 @@
     
     <section class="form-group">
       <label class='caption' for="username">Nombre de usuario</label>
-      <input class='input' type="text" name="username" id="username" value="{{ $oldInput['username'] }}">
+      <input class='input' type="text" name="username" id="username" value="{{ $oldInput['username'] ?? '' }}">
       @if (isset($errors) && $errors->has('username'))
         <p class="error">
           <span class="close fas fa-times"></span>
@@ -47,7 +45,7 @@
     
     <section class="form-group">
       <label class='caption' for="email">Correo</label>
-      <input class='input' type="text" name="email" id="email" value="{{ $oldInput['email'] }}">
+      <input class='input' type="email" name="email" id="email" value="{{ $oldInput['email'] ?? '' }}">
       @if (isset($errors) && $errors->has('email'))
         <p class="error">
           <span class="close fas fa-times"></span>
@@ -58,7 +56,7 @@
     
     <section class="form-group">
       <label class='caption' for="password">Contraseña</label>
-      <input class='input' type="password" name="password" id="password" value="{{ $oldInput['password'] }}">
+      <input class='input' type="password" name="password" id="password" value="{{ $oldInput['password'] ?? '' }}">
       @if (isset($errors) && $errors->has('password'))
         <p class="error">
           <span class="close fas fa-times"></span>
@@ -78,8 +76,12 @@
       @endif
     </section>
 
+    {{-- No es necesario guardar y rellenar el valor del avatar porque los navegadores no mantienen los archivos seleccionados en las cargas después de la recarga de la página. --}}
+    
     <section id="avatar-container" class="avatar-preview">
-      <img id="avatar-img" class="avatar" src="" alt="">
+      @if (isset($oldInput['avatar']) && $oldInput['avatar'])
+        <img id="avatar-img" class="avatar" src="{{ $oldInput['avatar'] }}" alt="Avatar">
+      @endif
     </section>
 
     <section class="form-group">
