@@ -1,50 +1,55 @@
 <?php
+
+require_once './core/Database.php'; // Incluir la clase Database
+
 class Model
 {
   protected $db;
+  protected $table;
 
-  public function __construct()
+  public function __construct($table)
   {
     $this->db = new Database();
+    $this->table = $table;
   }
 
-  // Métodos comunes de CRUD (Crear, Leer, Actualizar, Borrar)
-  // Puedes implementar estos métodos en tus modelos específicos según tus necesidades
-
-  public function create($table, $data)
+  public function create(array $data)
   {
     $columns = implode(', ', array_keys($data));
-    $placeholders = implode(', ', array_fill(0, count($data), '?'));
+    $placeholders = ':' . implode(', :', array_keys($data));
 
-    $query = "INSERT INTO {$table} ({$columns}) VALUES ({$placeholders})";
-    $values = array_values($data);
+    $query = "INSERT INTO {$this->table} ({$columns}) VALUES ({$placeholders})";
 
-    return $this->db->executeQuery(false, $query, $values);
+    return $this->db->executeQuery(false, $query, $data);
   }
 
-  public function read($table, $id)
+  public function read($id = null)
   {
-    $query = "SELECT * FROM {$table} WHERE id = ?";
-    $values = [$id];
-
-    return $this->db->executeQuery(true, $query, $values);
+    if ($id === null) {
+      $query = "SELECT * FROM {$this->table}";
+      return $this->db->executeQuery(true, $query);
+    } else {
+      $query = "SELECT * FROM {$this->table} WHERE id = :id";
+      return $this->db->executeQuery(true, $query, ['id' => $id]);
+    }
   }
 
-  public function update($table, $id, $data)
+  public function update($id, array $data)
   {
-    $setClause = implode(' = ?, ', array_keys($data)) . ' = ?';
+    $setClause = implode(', ', array_map(function ($key) {
+      return "{$key} = :{$key}";
+    }, array_keys($data)));
 
-    $query = "UPDATE {$table} SET {$setClause} WHERE id = ?";
-    $values = array_merge(array_values($data), [$id]);
+    $data['id'] = $id;
+    $query = "UPDATE {$this->table} SET {$setClause} WHERE id = :id";
 
-    return $this->db->executeQuery(false, $query, $values);
+    return $this->db->executeQuery(false, $query, $data);
   }
 
-  public function delete($table, $id)
+  public function delete($id)
   {
-    $query = "DELETE FROM {$table} WHERE id = ?";
-    $values = [$id];
+    $query = "DELETE FROM {$this->table} WHERE id = :id";
 
-    return $this->db->executeQuery(false, $query, $values);
+    return $this->db->executeQuery(false, $query, ['id' => $id]);
   }
 }
