@@ -1,55 +1,30 @@
 <?php
 
-require_once './core/Database.php'; // Incluir la clase Database
+require_once './core/Database.php';
 
 class Model
 {
   protected $db;
   protected $table;
+  protected $attributes = [];
 
-  public function __construct($table)
+  public function __construct($table, $attributes)
   {
     $this->db = new Database();
     $this->table = $table;
+    $this->attributes = $attributes;
   }
 
-  public function create(array $data)
+  public function save()
   {
-    $columns = implode(', ', array_keys($data));
-    $placeholders = ':' . implode(', :', array_keys($data));
+    $columns = implode(',', array_keys($this->attributes));
+    $placeholders = ":" . implode(', :', array_keys($this->attributes));
 
-    $query = "INSERT INTO {$this->table} ({$columns}) VALUES ({$placeholders})";
+    $query = "INSERT INTO {$this->table} ($columns) VALUES ($placeholders)";
 
-    return $this->db->executeQuery(false, $query, $data);
+    $result = $this->db->executeQuery(false, $query, $this->attributes);
+
+    return $result;
   }
 
-  public function read($id = null)
-  {
-    if ($id === null) {
-      $query = "SELECT * FROM {$this->table}";
-      return $this->db->executeQuery(true, $query);
-    } else {
-      $query = "SELECT * FROM {$this->table} WHERE id = :id";
-      return $this->db->executeQuery(true, $query, ['id' => $id]);
-    }
-  }
-
-  public function update($id, array $data)
-  {
-    $setClause = implode(', ', array_map(function ($key) {
-      return "{$key} = :{$key}";
-    }, array_keys($data)));
-
-    $data['id'] = $id;
-    $query = "UPDATE {$this->table} SET {$setClause} WHERE id = :id";
-
-    return $this->db->executeQuery(false, $query, $data);
-  }
-
-  public function delete($id)
-  {
-    $query = "DELETE FROM {$this->table} WHERE id = :id";
-
-    return $this->db->executeQuery(false, $query, ['id' => $id]);
-  }
 }
