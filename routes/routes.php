@@ -8,7 +8,6 @@ return [
       'method' => 'GET'
     ]
   ],
-
   'login' => [
     'GET' => [
       'controller' => 'AuthController',
@@ -21,6 +20,17 @@ return [
       'method' => 'POST'
     ],
   ],
-
+  'register' => [
+    'GET' => [
+      'controller' => 'AuthController',
+      'action' => 'getRegister',
+      'method ' => 'GET',
+    ],
+    'POST' => [
+      'controller' => 'AuthController',
+      'action' => 'doRegister',
+      'method ' => 'POST',
+    ]
+  ]
   // Más rutas...
 ];
