@@ -13,6 +13,8 @@
 </head>
 <body>
 
+  @yield('navigation')
+
   @includeWhen($showHeader, 'components.header')
 
   <main class="content">
