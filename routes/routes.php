@@ -38,6 +38,25 @@ return [
       'action' => 'getApp',
       'method' => 'GET'
     ]
+  ],
+  'app/projects' => [
+    'GET' => [
+      'controller' => 'AppController',
+      'action' => 'showProjects',
+      'method' => 'GET'
+    ]
+  ],
+  'app/projects/create' => [
+    'GET' => [
+      'controller' => 'AppController',
+      'action' => 'showProjectForm',
+      'method' => 'GET'
+    ],
+    'POST' => [
+      'controller' => 'AppController',
+      'action' => 'createProject',
+      'method' => 'POST'
+    ]
   ]
   // Más rutas...
 ];
