@@ -95,4 +95,17 @@ class User extends Model
       $this->avatar,
     ]);
   }
+
+  public function verifyCreedentialsByEmail($email, $password) {
+    $query = "SELECT * FROM users WHERE Email = :email LIMIT 1";
+
+    $user = $this->db->executeQuery(true, $query, [$email]);
+
+
+    if ($user && password_verify($password, $user[0]["Password"])) {
+      return [true, $user];
+    }
+    
+    return [false, null];
+  }
 }
