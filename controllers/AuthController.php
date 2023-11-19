@@ -97,6 +97,6 @@ class AuthController extends Controller
 
     $result = $user->save();
 
-    $this->redirect('login?message=accountCreated', ['result' => '¡Cuenta creada exitosamente!']);
+    $this->redirect('login?message=accountCreated');
   }
 }
