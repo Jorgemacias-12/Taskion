@@ -13,7 +13,36 @@ class AuthController extends Controller
 
   public function doLogin()
   {
+    $email = $_POST['email'] ?? null;
+    $password = $_POST['password'] ?? null;
 
+    $errors = new MessageBag();
+
+    if (empty($email)) {
+      $errors->add('email', 'El campo email es obligatorio.');
+    }
+    elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+      $errors->add('email', 'El correo electrónico no es válido.');
+    }
+
+    if (empty($password)) {
+      $errors->add('password', 'El campo contraseña es obligatorio.');
+    }
+
+    if ($errors->isNotEmpty()) {
+      $this->view('login', ['showHeader' =>  true, 'errors' => serialize($errors)]);
+    }
+
+    $user = new User(null, null, null, $email, $password, null);
+
+    $result = $user->verifyCreedentialsByEmail($email, $password);
+
+    if ($result[0]) {
+      $_SESSION['loggedIn'] = true;
+      $_SESSION['user'] = $result[1];
+
+      $this->redirect('app');
+    }
   }
 
   public function getRegister()
