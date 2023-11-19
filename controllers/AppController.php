@@ -19,20 +19,20 @@ class AppController extends Controller
     }
 
     // Load projects
-    $projects = $this->getProjects() ?? [];
+    $projects = $this->getProjectsData() ?? [];
 
     // Load tasks
-    $tasks = $this->getTasks() ?? [];
+    $tasks = $this->getsTasksData() ?? [];
 
     $this->view('app', ['showHeader' => false, 'projects' => $projects, 'tasks' => $tasks]);
   }
 
-  public function getProjects()
+  public function getProjectsData()
   {
     return null;
   }
 
-  public function getTasks()
+  public function getsTasksData()
   {
     return null;
   }
