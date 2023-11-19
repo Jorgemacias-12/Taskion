@@ -11,6 +11,7 @@ class Project extends Model
 
   public function __construct($name = null, $description = null, $startDate = null, $finishDate = null, $createdByUser = null)
   {
+    parent::__construct();
     $this->name = $name;
     $this->description = $description;
     $this->startDate = $startDate;
@@ -73,7 +74,7 @@ class Project extends Model
   public function save()
   {
     $sql = "INSERT INTO projects (Name, Description, StartDate, FinishDate, User_id) VALUES (?, ?, ?, ?, ?)";
-
+    
     return $this->db->executeQuery(false, $sql, [
       $this->name,
       $this->description,
