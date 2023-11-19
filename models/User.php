@@ -105,7 +105,7 @@ class User extends Model
 
 
     if ($user && password_verify($password, $user[0]["Password"])) {
-      
+      $this->id = $user[0]['id'];
       $this->name = $user[0]['Name'];
       $this->username = $user[0]['Username'];
       $this->email = $user[0]['Email'];
