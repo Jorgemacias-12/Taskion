@@ -44,7 +44,7 @@ class AuthController extends Controller
 
     if ($result[0]) {
       $_SESSION['loggedIn'] = true;
-      $_SESSION['user'] = $result[1];
+      $_SESSION['user'] = serialize($result[1]);
 
       $this->redirect('app');
     }
