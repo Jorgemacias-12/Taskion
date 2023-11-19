@@ -31,6 +31,13 @@ return [
       'action' => 'doRegister',
       'method ' => 'POST',
     ]
+  ],
+  'app' => [
+    'GET' => [
+      'controller' => 'AppController',
+      'action' => 'getApp',
+      'method' => 'GET'
+    ]
   ]
   // Más rutas...
 ];
