@@ -1,10 +1,14 @@
 @extends('base')
 
-@section('title', 'Projects')
+@section('title', 'App')
 
 @push('styles')
   <link rel="stylesheet" href="/public/css/app.css">
   <link rel="stylesheet" href="/public/css/navigation.css">
+@endpush
+
+@push('scripts')
+  <script defer src="/public/js/app.js"></script>
 @endpush
 
 @php
