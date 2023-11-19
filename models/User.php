@@ -75,7 +75,9 @@ class User extends Model
 
   public function setAvatar($avatar)
   {
-    $this->avatar = $avatar;
+    $image_data = base64_encode($avatar);
+
+    $this->avatar = $image_data;
   }
 
   public function __toString()
@@ -103,7 +105,14 @@ class User extends Model
 
 
     if ($user && password_verify($password, $user[0]["Password"])) {
-      return [true, $user];
+      
+      $this->name = $user[0]['Name'];
+      $this->username = $user[0]['Username'];
+      $this->email = $user[0]['Email'];
+      $this->password = $user[0]['Password'];
+      $this->setAvatar($user[0]['Avatar']);
+
+      return [true, $this];
     }
     
     return [false, null];
