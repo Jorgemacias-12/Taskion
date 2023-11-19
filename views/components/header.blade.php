@@ -16,6 +16,15 @@
     </section>
     <nav class="navigation">
       <ul class="nav-list">
+
+        @if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'])
+          <li class="nav-item">
+            <a href="/app" class="nav-link">
+              Ir a la aplicación
+            </a>
+          </li>
+        @endif
+
         <li class="nav-item"><a href="/login" class="nav-link">Iniciar sesión</a></li>
         <li class="nav-item">
           <a href="/register" class="nav-link">
