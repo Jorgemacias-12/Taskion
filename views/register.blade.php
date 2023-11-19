@@ -3,7 +3,7 @@
 @section('title', 'Registrarse')
 
 @push('styles')
-  <link rel="stylesheet" href="/public/css/register.css">
+  <link rel="stylesheet" href="/public/css/form.css">
 @endpush
 
 @push('scripts')
@@ -83,7 +83,7 @@
     
     <section id="avatar-container" class="avatar-preview">
       @if (isset($oldInput['avatar']) && $oldInput['avatar'])
-        <img id="avatar-img" class="avatar" src="{{ $oldInput['avatar'] }}" alt="Avatar">
+        <img id="avatar-img" class="avatar" src="" alt="Avatar">
       @endif
     </section>
 
