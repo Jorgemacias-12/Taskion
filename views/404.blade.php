@@ -3,6 +3,8 @@
 @section('title', 'Page Not Found')
 
 @push('styles')
+  <link rel="stylesheet" href="/public/css/initial.css">
+  <link rel="stylesheet" href="/public/css/header.css">
   <link rel="stylesheet" href="/public/css/404.css">
 @endpush
 
