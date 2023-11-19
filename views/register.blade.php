@@ -82,9 +82,7 @@
     {{-- No es necesario guardar y rellenar el valor del avatar porque los navegadores no mantienen los archivos seleccionados en las cargas después de la recarga de la página. --}}
     
     <section id="avatar-container" class="avatar-preview">
-      @if (isset($oldInput['avatar']) && $oldInput['avatar'])
-        <img id="avatar-img" class="avatar" src="" alt="Avatar">
-      @endif
+      <img id="avatar-img" class="avatar" src="" alt="Users avatar" />
     </section>
 
     <section class="form-group">
