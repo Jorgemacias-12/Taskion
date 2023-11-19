@@ -8,9 +8,8 @@ class AuthController extends Controller
 {
   public function getLogin()
   {
-    session_start();
 
-    if (!isset($_SESSION['user'])) {
+    if (isset($_SESSION['user'])) {
       $this->redirect("app");
     }
 
