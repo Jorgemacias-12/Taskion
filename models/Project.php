@@ -74,7 +74,7 @@ class Project extends Model
   public function save()
   {
     $sql = "INSERT INTO projects (Name, Description, StartDate, FinishDate, User_id) VALUES (?, ?, ?, ?, ?)";
-    
+
     return $this->db->executeQuery(false, $sql, [
       $this->name,
       $this->description,
@@ -82,5 +82,22 @@ class Project extends Model
       $this->finishDate,
       $this->createdByUser,
     ]);
+  }
+
+  public function read($id = null) {
+    
+    $sql = "SELECT * FROM projects";
+    
+    if ($id !== null) {
+      $sql = "SELECT * FROM projects where id = ?";
+    }
+    
+    $result = $this->db->executeQuery(true, $sql, []);
+
+    if (empty($result) || $result === null) {
+      return null;
+    }
+
+    return $result;
   }
 }
