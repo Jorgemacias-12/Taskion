@@ -125,8 +125,8 @@ class AppController extends Controller
 
     $project_name = $_POST['project_name'] ?? null;
     $project_description = $_POST['project_description'] ?? null;
-    $project_startDate = $_POST['project_startDate'] ?? null;
-    $project_finishDate = $_POST['project_finishDate'] ?? null;
+    $project_startDate = date('Y-m-d', strtotime($_POST['project_startDate'])) ?? null;
+    $project_finishDate = date('Y-m-d', strtotime($_POST['project_finishDate'])) ?? null;
 
     $errors = new MessageBag();
 
@@ -151,9 +151,9 @@ class AppController extends Controller
       return;
     }
 
-    $project = new Project($project_name, $project_description, $project_startDate, $project_finishDate, $user_id);
+    $project = new Project(null, $project_name, $project_description, $project_startDate, $project_finishDate, $user_id);
 
-    $project->save();
+    $result = $project->save();
 
     $this->redirect('app/projects?projectCreated');
   }
