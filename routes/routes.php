@@ -46,6 +46,25 @@ return [
       'method' => 'GET'
     ]
   ],
+  'app/tasks' => [
+    'GET' => [
+      'controller' => 'AppController',
+      'action' => 'showTasks',
+      'method' => 'GET'
+    ]
+  ],
+  'app/tasks/create' => [
+    'GET' => [
+      'controller' => 'AppController',
+      'action' => 'showTaskForm',
+      'method' => 'GET'
+    ],
+    'POST' => [
+      'controller' => 'AppController',
+      'action' => 'createTask',
+      'method' => 'POST'
+    ]
+  ],
   'app/projects/create' => [
     'GET' => [
       'controller' => 'AppController',
@@ -56,6 +75,13 @@ return [
       'controller' => 'AppController',
       'action' => 'createProject',
       'method' => 'POST'
+    ]
+  ],
+  'app/user/edit' => [
+    'GET' => [
+      'controller' => 'UserController',
+      'action' => 'showUserProfile',
+      'method' => 'GET'
     ]
   ]
   // Más rutas...
