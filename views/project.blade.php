@@ -1,6 +1,6 @@
 @extends('base')
 
-@section('title', 'App')
+@section('title', 'Crear proyecto')
 
 @push('styles')
   <link rel="stylesheet" href="/public/css/app.css">
