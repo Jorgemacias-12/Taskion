@@ -39,7 +39,11 @@
     </h2>
 
     <section id="projects">
-      
+      @if(isset($projects))
+        @foreach($projects as $project => $value)
+          @include('components.project', ['project' => $value])
+        @endforeach
+      @endif
     </section>
 
   </section>
@@ -50,7 +54,7 @@
     </h2>
 
     <section id="tasks">
-
+      
     </section>
 
   </section>
