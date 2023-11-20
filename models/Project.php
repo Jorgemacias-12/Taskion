@@ -9,7 +9,7 @@ class Project extends Model
   private $finishDate;
   private $createdByUser;
 
-  public function __construct($id, $name = null, $description = null, $startDate = null, $finishDate = null, $createdByUser = null)
+  public function __construct($id = null, $name = null, $description = null, $startDate = null, $finishDate = null, $createdByUser = null)
   {
     parent::__construct();
 
