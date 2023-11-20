@@ -22,11 +22,11 @@
 @section('content')
 
   <section class="links">
-    <a href="app/projects" class="link">
+    <a href="/app/projects" class="link">
       <span class="fas fa-folder"></span>
       Ir a proyectos
     </a>
-    <a href="app/tasks" class="link">
+    <a href="/app/tasks" class="link">
       <span class="fas fa-list"></span>
       Ir a tareas
     </a>
