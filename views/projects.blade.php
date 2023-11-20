@@ -34,6 +34,11 @@
 
   <section class="links">
     
+    <a href="/app/" class="link">
+      <span class="fas fa-home"></span>
+      Inicio
+    </a>
+    
     <a href="projects/create" class="link">
       <span class="fas fa-plus"></span>
       Crear proyecto
@@ -42,7 +47,11 @@
   </section>
 
   <section class="flex col" id="projects">
-    {{-- Poner aquí código que cargue todos los proyectos :P --}}
+    @if(isset($projects))
+      {{-- <pre>
+        {{  }}
+      </pre> --}}
+    @endif
   </section>
 
 @endsection
