@@ -44,8 +44,12 @@ class AuthController extends Controller
 
     if ($result[0]) {
       $_SESSION['loggedIn'] = true;
-      $_SESSION['user'] = serialize($result[1]);
 
+      if (property_exists($result[1], 'db')) {
+        $result[1]->removeDbProperty();
+      }
+
+      $_SESSION['user'] = serialize($result[1]);
       $this->redirect('app');
     }
   }
