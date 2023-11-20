@@ -22,27 +22,27 @@
                 <span class="opener fas fa-cog fa-2x"></span>
                 <ul class="dropdown">
                     <li class="dropdown-item">
-                      <a href="/" class="dropdown-link">
+                      <a href="/app" class="dropdown-link">
                         <span class="fas fa-home"></span>
                         Ir al inicio
                       </a>
                     </li>
                     <li class="dropdown-item">
-                      <a href="" class="dropdown-link">
+                      <a href="/app/projects" class="dropdown-link">
                         <span class="fas fa-folder"></span>
                         Ver proyectos
                       </a>
                     </li>
                     <li class="dropdown-item">
-                      <a href="" class="dropdown-link">
+                      <a href="/app/tasks" class="dropdown-link">
                         <span class="fas fa-list"></span>
                         Ver tareas
                       </a>
                     </li>
                     <li class="dropdown-item">
-                      <a href="/app/edit/user" class="dropdown-link">
+                      <a href="/app/user" class="dropdown-link">
                         <span class="fas fa-user"></span>
-                        Editar información
+                        Mi perfil
                       </a>
                     </li>
                     <li class="dropdown-item">
