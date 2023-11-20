@@ -86,15 +86,22 @@ class Project extends Model
 
   public function save()
   {
-    $sql = "INSERT INTO projects (Name, Description, StartDate, FinishDate, User_id) VALUES (?, ?, ?, ?, ?)";
+    try {
+      $sql = "INSERT INTO projects (Name, Description, StartDate, FinishDate, User_id) VALUES (?, ?, ?, ?, ?)";
 
-    return $this->db->executeQuery(false, $sql, [
-      $this->name,
-      $this->description,
-      $this->startDate,
-      $this->finishDate,
-      $this->createdByUser,
-    ]);
+      var_dump($this);
+
+      return $this->db->executeQuery(false, $sql, [
+        $this->name,
+        $this->description,
+        $this->startDate,
+        $this->finishDate,
+        $this->createdByUser,
+      ]);
+    }
+    catch(Exception $e){
+      throw new Error( $e->getMessage(), 500);
+    }
   }
 
   public function read($id = null)
