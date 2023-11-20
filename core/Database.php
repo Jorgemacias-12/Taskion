@@ -34,21 +34,19 @@ class Database
   {
     try {
       $stmt = $this->conn->prepare($query);
+
       $stmt->execute($values);
 
       if ($isSelect) {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
       }
-
-      return $stmt->rowCount();
-
-    } 
-    catch (PDOException $e) {
-      echo "Error: " . $e->getMessage();
-      return false;
+      else 
+      {
+        return $stmt->rowCount();
+      }
     }
-    finally {
-      $this->closeConnection();
+    catch(PDOException $e) {
+      throw new Exception("Error: " . $e->getMessage());
     }
   }
 
@@ -56,6 +54,11 @@ class Database
   public function closeConnection()
   {
     $this->conn = null;
+  }
+
+  public function getConnection() 
+  {
+    return $this->conn;
   }
 }
 
