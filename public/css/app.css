@@ -1,5 +1,5 @@
 body {
-  background-color: black;
+  background-color: #21252b;
 }
 
 .content {
@@ -12,7 +12,7 @@ body {
 
 .container {
   background-color: #303030;
-  padding: 1rem;;
+  padding: 1rem;
 }
 
 .links {
@@ -24,7 +24,7 @@ body {
 
 .link {
   display: flex;
-  justify-content: center; 
+  justify-content: center;
   align-items: center;
   color: white;
   text-decoration: none;
@@ -35,4 +35,26 @@ body {
 
 .link:hover {
   background-color: #303030;
+}
+
+.select {
+  width: 100%;
+  padding: 0.5em 1em 0.5em 0.5em;
+  border: 0.1rem solid transparent;
+  border-radius: 0.25em;
+  background-color: #222;
+  font-size: 1em;
+  color: #fff;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAiIGhlaWdodD0iNiIgdmlld0JveD0iMCAwIDEwIDYiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTUuNzAzMTIgNS42MjVMMTAgMS4zMzEyNUgxeiIgZmlsbD0iI2ZmZmZmZiIvPjwvc3ZnPg==');
+  background-repeat: no-repeat;
+  background-position: right 0.5em center;
+  background-size: 10px;
+}
+
+.create-task-container {
+  gap: 1rem;
 }
