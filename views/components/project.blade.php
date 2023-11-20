@@ -40,8 +40,8 @@
     </section>
 
     <section class="project-operations">
-      <a href="/app/projects/edit/{{$id}}" class="project-button">Editar</a>
-      <a href="/app/projects/delete/{{$id}}" class="project-button">Eliminar</a>
+      <a class="project-operation" href="/app/projects/edit/{{$id}}" class="project-button">Editar</a>
+      <a class="project-operation" href="/app/projects/delete/{{$id}}" class="project-button">Eliminar</a>
     </section>
 
 </article>
