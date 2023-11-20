@@ -2,16 +2,18 @@
 
 class Project extends Model
 {
-
+  private $id;
   private $name;
   private $description;
   private $startDate;
   private $finishDate;
   private $createdByUser;
 
-  public function __construct($name = null, $description = null, $startDate = null, $finishDate = null, $createdByUser = null)
+  public function __construct($id, $name = null, $description = null, $startDate = null, $finishDate = null, $createdByUser = null)
   {
     parent::__construct();
+
+    $this->id = $id;
     $this->name = $name;
     $this->description = $description;
     $this->startDate = $startDate;
@@ -20,6 +22,12 @@ class Project extends Model
   }
 
   // Métodos Get
+
+  public function getId()
+  {
+    return $this->id;
+  }
+
   public function getName()
   {
     return $this->name;
@@ -46,6 +54,11 @@ class Project extends Model
   }
 
   // Métodos Set
+  public function setId($id)
+  { 
+    $this->id = $id;
+  }
+
   public function setName($name)
   {
     $this->name = $name;
@@ -84,14 +97,15 @@ class Project extends Model
     ]);
   }
 
-  public function read($id = null) {
-    
+  public function read($id = null)
+  {
+
     $sql = "SELECT * FROM projects";
-    
+
     if ($id !== null) {
       $sql = "SELECT * FROM projects where id = ?";
     }
-    
+
     $result = $this->db->executeQuery(true, $sql, []);
 
     if (empty($result) || $result === null) {
@@ -99,5 +113,23 @@ class Project extends Model
     }
 
     return $result;
+  }
+
+  public function update($id = null)
+  {
+    $sql = "UPDATE projects SET () WHERE id = ?";
+
+    $this->db->executeQuery(false, $sql, [
+      $id
+    ]);
+  }
+
+  public function delete()
+  {
+    $sql = "DELETE FROM projects WHERE id = ?";
+
+    $this->db->executeQuery(false, $sql, [
+      $this->id
+    ]);
   }
 }
