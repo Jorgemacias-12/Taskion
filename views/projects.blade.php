@@ -14,6 +14,8 @@
 
 @php
   $user = isset($_SESSION['user']) ? unserialize($_SESSION['user']) : null;
+
+  // var_dump($projects);
 @endphp
 
 @section('navigation')
@@ -48,9 +50,9 @@
 
   <section class="flex col" id="projects">
     @if(isset($projects))
-      {{-- <pre>
-        {{  }}
-      </pre> --}}
+      @foreach($projects as $project => $value)
+        @include('components.project', ['project' => $value])
+      @endforeach
     @endif
   </section>
 
