@@ -10,4 +10,9 @@ class Model
   {
     $this->db = new Database();
   }
+
+  public function removeDbProperty() 
+  {
+    unset($this->db);
+  }
 }
