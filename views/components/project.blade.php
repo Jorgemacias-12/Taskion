@@ -1,18 +1,19 @@
 @php
-    $name = $project['Name'];
-    $description = $project['Description'];
-    $startDate = $project['StartDate'];
-    $finishDate = new DateTime($project['FinishDate']);
+  $id = $project['id'];
+  $name = $project['Name'];
+  $description = $project['Description'];
+  $startDate = $project['StartDate'];
+  $finishDate = new DateTime($project['FinishDate']);
 
-    $actualDate = new DateTime();
+  $actualDate = new DateTime();
 
-    $difference = $actualDate->diff($finishDate);
+  $difference = $actualDate->diff($finishDate);
 
-    // Extraer componentes relevantes del objeto DateInterval
-    $days = $difference->days;
-    $hours = $difference->h;
-    $minutes = $difference->i;
-    $seconds = $difference->s;
+  // Extraer componentes relevantes del objeto DateInterval
+  $days = $difference->days;
+  $hours = $difference->h;
+  $minutes = $difference->i;
+  $seconds = $difference->s;
 @endphp
 
 <article class="project-card">
@@ -37,4 +38,10 @@
             {{ $finishDate->format('Y-m-d') }}
         </p>
     </section>
+
+    <section class="project-operations">
+      <a href="/app/projects/edit/{{$id}}" class="project-button">Editar</a>
+      <a href="/app/projects/delete/{{$id}}" class="project-button">Eliminar</a>
+    </section>
+
 </article>
