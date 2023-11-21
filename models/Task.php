@@ -9,7 +9,7 @@ class Task extends Model
   private $createdInProject;
   private $userId;
 
-  public function __construct($name = null, $description = null, $startDate = null, $finishDate = null, $createdInProject = null, $userId)
+  public function __construct($name = null, $description = null, $startDate = null, $finishDate = null, $createdInProject = null, $userId = null)
   {
     parent::__construct();
     $this->name = $name;
