@@ -35,7 +35,7 @@
         </p>
 
         <p class="project-finish">
-            {{ $finishDate->format('Y-m-d') }}
+          Fecha fin: {{ $finishDate->format('Y-m-d') }}
         </p>
     </section>
 
