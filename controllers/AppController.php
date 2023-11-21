@@ -24,7 +24,7 @@ class AppController extends Controller
     $projects = $this->getProjectsData() ?? [];
 
     // Load tasks
-    $tasks = $this->getsTasksData() ?? [];
+    $tasks = $this->getTasksData() ?? [];
 
     $this->view('app', ['showHeader' => false, 'projects' => $projects, 'tasks' => $tasks]);
   }
@@ -35,7 +35,7 @@ class AppController extends Controller
       $this->redirect("login");
     }
 
-    $tasks = $this->getsTasksData();
+    $tasks = $this->getTasksData();
 
     $this->view('tasks', ['showHeader' => false, 'tasks' => $tasks]);
   }
@@ -274,8 +274,10 @@ class AppController extends Controller
     return $project->read();
   }
 
-  public function getsTasksData()
+  public function getTasksData()
   {
-    return null;
+    $task = new Task();
+
+    return $task->read();
   }
 }
