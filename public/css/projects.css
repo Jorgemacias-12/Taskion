@@ -61,26 +61,6 @@ body {
   padding: 1rem;
 }
 
-.project-card {
-  background-color: #3e4551;
-  padding: 1rem;
-  border-radius: 0.2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.project-operation {
-  display: inline-flex;
-  justify-content: center; 
-  align-items: center;
-  color: white;
-  text-decoration: none;
-  background-color: #533fce;
-  padding-inline: 0.5rem;
-  height: 2rem;
-}
-
 #projects {
   gap: 1rem;
 }
