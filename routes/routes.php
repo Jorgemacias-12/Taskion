@@ -72,6 +72,25 @@ return [
       'method' => 'GET'
     ]
   ],
+  'app/tasks/delete/:id' => [
+    'GET' => [
+      'controller' => 'AppController',
+      'action' => 'deleteTask',
+      'method' => 'GET'
+    ]
+  ],
+  'app/tasks/edit/:id' => [
+    'GET' => [
+      'controller' => 'AppController',
+      'action' => 'showEditTask',
+      'method' => 'GET'
+    ],
+    'POST' => [
+      'controller' => 'AppController',
+      'action' => 'editTask',
+      'method' => 'POST'
+    ]
+  ],
   'app/tasks/create' => [
     'GET' => [
       'controller' => 'AppController',

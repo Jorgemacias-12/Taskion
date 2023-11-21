@@ -2,6 +2,7 @@
 
 class Task extends Model
 {
+  private $id;
   private $name;
   private $description;
   private $startDate;
@@ -9,9 +10,10 @@ class Task extends Model
   private $createdInProject;
   private $userId;
 
-  public function __construct($name = null, $description = null, $startDate = null, $finishDate = null, $createdInProject = null, $userId = null)
+  public function __construct($id = null, $name = null, $description = null, $startDate = null, $finishDate = null, $createdInProject = null, $userId = null)
   {
     parent::__construct();
+    $this->id = $id;
     $this->name = $name;
     $this->description = $description;
     $this->startDate = $startDate;
@@ -77,7 +79,8 @@ class Task extends Model
     $this->createdInProject = $createdInProject;
   }
 
-  public function setUserId($userId) {
+  public function setUserId($userId)
+  {
     $this->userId = $userId;
   }
 
@@ -87,6 +90,10 @@ class Task extends Model
       $conn = $this->db->getConnection();
 
       $sql = "INSERT INTO tasks (Name, Description, StartDate, FinishDate, Project_id) VALUES (?, ?, ?, ?, ?)";
+
+      var_dump($this);
+      print_r("Valor:" . $this->finishDate . " <br>");
+      // var_dump($this->startDate);
 
       $this->db->executeQuery(false, $sql, [
         $this->name,
@@ -135,7 +142,13 @@ class Task extends Model
 
   }
 
-  public function delete(){
-    
+  public function delete()
+  {
+    $sql = "DELETE FROM tasks WHERE id = ?";
+
+
+    return $this->db->executeQuery(false, $sql, [
+      $this->id
+    ]);
   }
 }

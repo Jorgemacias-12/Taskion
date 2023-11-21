@@ -290,7 +290,7 @@ class AppController extends Controller
 
       $result = $task->delete();
 
-      var_dump($result);
+      // var_dump($result);
 
       $this->redirect("app/tasks?projectDeleted");
     } else {
