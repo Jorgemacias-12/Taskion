@@ -14,6 +14,7 @@
 
 @php
   $user = isset($_SESSION['user']) ? unserialize($_SESSION['user']) : null;
+
 @endphp
 
 @section('navigation')
@@ -40,12 +41,11 @@
 
     <form action="/app/projects/{{ $endpoint === 'edit' ? 'edit/' . $projectId : $endpoint }}" method="post" class="form flex col" id="create-project">
 
-
       <input type="hidden" name="user_id" value={{ $user->getId() }}>
 
       <section class="form-group">
         <label for="" class="label">Nombre del proyecto</label>
-        <input class="input" type="text" name="project_name" id="">
+        <input class="input" type="text" name="project_name" id="" value="{{ isset($project) ? $project->getName() : '' }}">
          @if (isset($errors) && $errors->has('name'))
           <p class="error">
             <span class="close fas fa-times"></span>
@@ -56,7 +56,7 @@
 
       <section class="form-group">
         <label for="" class="label">Descripción del proyecto</label>
-        <input class="input" type="text" name="project_description" id="">
+        <input class="input" type="text" name="project_description" id="" value="{{ isset($project) ? $project->getDescription() : '' }}">
         @if (isset($errors) && $errors->has('description'))
           <p class="error">
             <span class="close fas fa-times"></span>
@@ -67,7 +67,7 @@
 
       <section class="form-group">
         <label for="" class="label">Fecha de inicio</label>
-        <input class="input" type="date" name="project_startDate" id="">
+        <input class="input" type="date" name="project_startDate" id="" value="{{ isset($project) ? $project->getStartDate() : '' }}">
         @if (isset($errors) && $errors->has('startDate'))
           <p class="error">
             <span class="close fas fa-times"></span>
@@ -78,7 +78,7 @@
       
       <section class="form-group">
         <label for="" class="label">Fecha de termino</label>
-        <input class="input" type="date" name="project_finishDate" id="">
+        <input class="input" type="date" name="project_finishDate" id="" value="{{ isset($project) ? $project->getFinishDate() : '' }}">
         @if (isset($errors) && $errors->has('finishDate'))
           <p class="error">
             <span class="close fas fa-times"></span>

@@ -57,7 +57,7 @@ class AppController extends Controller
       $this->redirect("login");
     }
 
-    $this->view('project', ['showHeader' => false,]);
+    $this->view('project', ['showHeader' => false, 'endpoint' => 'create']);
   }
 
   public function showTaskForm()
@@ -164,7 +164,76 @@ class AppController extends Controller
       $this->redirect("login");
     }
 
-    echo "Si funciona";
+    // Obtén la URL de la superglobal $_GET
+    $url = $_GET['url'] ?? '';
+
+    // Divide la URL en partes usando '/'
+    $urlParts = explode('/', $url);
+
+    // Obtiene el último elemento del array como el valor de 'id'
+    $projectId = end($urlParts);
+
+    $project = new Project($projectId);
+    $project = $project->read($projectId)[0];
+    $project = new Project(
+      $project['id'],
+      $project['Name'],
+      $project['Description'],
+      $project['StartDate'],
+      $project['FinishDate'],
+      $project['User_id'],
+    );
+    
+    $this->view('project', ['showHeader' => false, 'endpoint' => 'edit', 'projectId' => $projectId, 'project' => $project]);
+
+  }
+
+  public function editProject()
+  {
+    // Obtén la URL de la superglobal $_GET
+    $url = $_GET['url'] ?? '';
+
+    // Divide la URL en partes usando '/'
+    $urlParts = explode('/', $url);
+
+    // Obtiene el último elemento del array como el valor de 'id'
+    $project_id = end($urlParts);
+
+    $user_id = $_POST['user_id'] ?? null;
+
+    $project_name = $_POST['project_name'] ?? null;
+    $project_description = $_POST['project_description'] ?? null;
+    $project_startDate = date('Y-m-d', strtotime($_POST['project_startDate'])) ?? null;
+    $project_finishDate = date('Y-m-d', strtotime($_POST['project_finishDate'])) ?? null;
+
+    $errors = new MessageBag();
+
+    if (empty($project_name)) {
+      $errors->add('name', 'El campo de nombre del proyecto es obligatiorio');
+    }
+
+    if (empty($project_description)) {
+      $errors->add('description', 'El campo de descripción del proyecto es obligatirio');
+    }
+
+    if (empty($project_startDate)) {
+      $errors->add('startDate', 'La fecha de inicio es obligatoria.');
+    }
+
+    if (empty($project_finishDate)) {
+      $errors->add('finishDate', 'La fecha de fin es obligatoria');
+    }
+
+    if ($errors->isNotEmpty()) {
+      $this->view('project', ['showHeader' => false, 'errors' => serialize($errors)]);
+      return;
+    }
+
+    $project = new Project($project_id, $project_name, $project_description, $project_startDate, $project_finishDate, $user_id);
+
+    $project->save();
+    
+    $this->redirect('app/projects?updatedProject');
   }
 
   public function deleteProject()

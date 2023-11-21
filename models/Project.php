@@ -55,7 +55,7 @@ class Project extends Model
 
   // Métodos Set
   public function setId($id)
-  { 
+  {
     $this->id = $id;
   }
 
@@ -98,38 +98,100 @@ class Project extends Model
         $this->finishDate,
         $this->createdByUser,
       ]);
-    }
-    catch(Exception $e){
-      throw new Error( $e->getMessage(), 500);
+    } catch (Exception $e) {
+      throw new Error($e->getMessage(), 500);
     }
   }
 
   public function read($id = null)
   {
-
     $sql = "SELECT * FROM projects";
 
+
     if ($id !== null) {
-      $sql = "SELECT * FROM projects where id = ?";
+      $sql .= " WHERE id = ?";
     }
 
-    $result = $this->db->executeQuery(true, $sql, []);
-
-    if (empty($result) || $result === null) {
-      return null;
+    if ($id !== null) {
+      $result = $this->db->executeQuery(true, $sql, [
+        $id
+      ]);
+    } else {
+      $result = $this->db->executeQuery(true, $sql, []);
     }
 
     return $result;
   }
 
-  public function update($id = null)
+  public function update()
   {
-    $sql = "UPDATE projects SET () WHERE id = ?";
+    try {
+      $currentProject = $this->read($this->id);
 
-    $this->db->executeQuery(false, $sql, [
-      $id
-    ]);
+      if (!$currentProject) {
+        throw new Exception("Project doesn't exist");
+      }
+
+      $currentProject = new Project(
+        $currentProject['id'],
+        $currentProject['Name'],
+        $currentProject['Description'],
+        $currentProject['StartDate'],
+        $currentProject['FinishDate'],
+        $currentProject['User_id']
+      );
+
+      // Compara los valores actuales con los nuevos
+      if (
+        $this->name === $currentProject->getName() &&
+        $this->description === $currentProject->getDescription() &&
+        $this->startDate === $currentProject->getStartDate() &&
+        $this->finishDate === $currentProject->getFinishDate() &&
+        $this->createdByUser === $currentProject->getCreatedByUser()
+      ) {
+        return true;
+      }
+
+      $sql = "UPDATE projects SET";
+      $updateValues = [];
+
+      if ($this->name !== $currentProject->getName()) {
+        $sql .= "Name = ?, ";
+        $updateValues[] = $this->name;
+      }
+
+      if ($this->description !== $currentProject->getDescription()) {
+        $sql .= "Description = ?, ";
+        $updateValues[] = $this->description;
+      }
+
+      if ($this->startDate !== $currentProject->getStartDate()) {
+        $sql .= "StartDate = ?, ";
+        $updateValues[] = $this->startDate;
+      }
+
+      if ($this->finishDate !== $currentProject->getFinishDate()) {
+        $sql .= "FinishDate = ?, ";
+        $updateValues[] = $this->finishDate;
+      }
+
+      if ($this->createdByUser !== $currentProject->getCreatedByUser()) {
+        $sql .= "User_id = ?, ";
+        $updateValues[] = $this->createdByUser;
+      }
+
+      $sql = rtrim($sql, ', ');
+
+      $sql .= " WHERE id = ?";
+
+      $updateValues[] = $this->id;
+
+      return $this->db->executeQuery(false, $sql, $updateValues);
+    } catch (Exception $e) {
+      throw new Error($e->getMessage(), 500);
+    }
   }
+
 
   public function delete()
   {

@@ -34,6 +34,20 @@
     </p>
   @endif
 
+  @if (isset($_GET['projectUpdated']))
+    <p class="success">
+      <span class="close fas fa-times"></span>
+      ¡Proyecto actualizado!
+    </p>
+  @endif
+
+  @if (isset($_GET['projectDeleted']))
+    <p class="success">
+      <span class="close fas fa-times"></span>
+      ¡Proyecto eliminado!
+    </p>
+  @endif
+
   <section class="links">
     
     <a href="/app/" class="link">
