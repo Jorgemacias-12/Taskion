@@ -15,14 +15,14 @@
 @php
   $user = isset($_SESSION['user']) ? unserialize($_SESSION['user']) : null;
 
-  $projects = unserialize($projects);
+  if ($endpoint !== "edit") {
+    $projects = unserialize($projects);
+  }
 @endphp
 
 @section('navigation')
   @include('components.navigation')
 @endsection
-
-{{-- This view has to have access to projects --}}
 
 @section('content') 
 
@@ -43,7 +43,7 @@
       Regresar a tareas
     </a>
 
-    <form action="/app/tasks/create" class="form" method="post" id="create-task">
+    <form action="/app/tasks/{{ $endpoint === 'edit' ? 'edit/' . $taskId : 'create' }}" class="form" method="post" id="create-task">
 
       <input type="hidden" name="user_id" value="{{ $user->getId() }}">
 
@@ -51,8 +51,8 @@
         <label for="" class="caption">Proyecto</label>
         <select class="select" name="project_id" id="project-id">
           <option value="null" selected disable>Selecciona un proyecto</option>
-          @foreach ($projects as $project => $projectValue )
-            <option value="{{ $projectValue['id'] }}"> {{ $projectValue['Name'] }}</option>
+          @foreach ($projects as $project => $projectValue)
+            <option value="{{ $projectValue['id'] }}">{{ $projectValue['Name'] }}</option>
           @endforeach
         </select>
         @if (isset($errors) && $errors->has('project'))
@@ -65,7 +65,7 @@
 
       <section class="form-group">
         <label for="" class="caption">Nombre</label>
-        <input class="input" type="text" name="task_name" id="">
+        <input class="input" type="text" name="task_name" id="" value="{{ isset($task) ? $task->getName() : '' }}">
         @if (isset($errors) && $errors->has('name'))
           <p class="error">
             <span class="close fas fa-times"></span>
@@ -76,8 +76,7 @@
       
       <section class="form-group">
         <label for="" class="caption">Descripción</label>
-        <input class="input" type="text" name="task_description" 
-        id="">
+        <input class="input" type="text" name="task_description" id="" value="{{ isset($task) ? $task->getDescription() : '' }}">
         @if (isset($errors) && $errors->has('description'))
           <p class="error">
             <span class="close fas fa-times"></span>
@@ -88,7 +87,7 @@
 
       <section class="form-group">
         <label for="" class="label">Fecha de inicio</label>
-        <input class="input" type="date" name="task_startDate" id="">
+        <input class="input" type="date" name="task_startDate" id="" value="{{ isset($task) ? $task->getStartDate() : '' }}">
         @if (isset($errors) && $errors->has('startDate'))
           <p class="error">
             <span class="close fas fa-times"></span>
@@ -99,7 +98,7 @@
       
       <section class="form-group">
         <label for="" class="label">Fecha de termino</label>
-        <input class="input" type="date" name="task_finishDate" id="">
+        <input class="input" type="date" name="task_finishDate" id="" value="{{ isset($task) ? $task->getFinishDate() : '' }}">
         @if (isset($errors) && $errors->has('finishDate'))
           <p class="error">
             <span class="close fas fa-times"></span>
