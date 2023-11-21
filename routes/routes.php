@@ -24,12 +24,12 @@ return [
     'GET' => [
       'controller' => 'AuthController',
       'action' => 'getRegister',
-      'method ' => 'GET',
+      'method' => 'GET',
     ],
     'POST' => [
       'controller' => 'AuthController',
       'action' => 'doRegister',
-      'method ' => 'POST',
+      'method' => 'POST',
     ]
   ],
   'app' => [
