@@ -89,8 +89,6 @@ class Project extends Model
     try {
       $sql = "INSERT INTO projects (Name, Description, StartDate, FinishDate, User_id) VALUES (?, ?, ?, ?, ?)";
 
-      var_dump($this);
-
       return $this->db->executeQuery(false, $sql, [
         $this->name,
         $this->description,
