@@ -5,6 +5,7 @@
 @push('styles')
   <link rel="stylesheet" href="/public/css/app.css">
   <link rel="stylesheet" href="/public/css/navigation.css">
+  <link rel="stylesheet" href="/public/css/cards.css">
 @endpush
 
 @push('scripts')
@@ -12,7 +13,7 @@
 @endpush
 
 @php
-  $user = isset($_SESSION['user']) ? unserialize($_SESSION['user']) : null;
+  $user = isset($_SESSION['user']) ? unserialize($_SESSION['user']) : null;  
 @endphp
 
 @section('navigation')
@@ -38,7 +39,7 @@
       Proyectos creados por tí
     </h2>
 
-    <section id="projects">
+    <section class="flex col" id="projects">
       @if(isset($projects))
         @foreach($projects as $project => $value)
           @include('components.project', ['project' => $value])
@@ -53,8 +54,12 @@
       Tareas creadas por tí
     </h2>
 
-    <section id="tasks">
-      
+    <section class="flex col" id="tasks">
+      @if(isset($tasks))
+        @foreach($tasks as $task)
+          @include('components.task', ['task' => $task])
+        @endforeach
+      @endif
     </section>
 
   </section>
