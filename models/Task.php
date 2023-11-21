@@ -109,4 +109,18 @@ class Task extends Model
       return $e->getMessage();
     }
   }
+
+  public function read() 
+  {
+
+  }
+
+  public function update()
+  {
+
+  }
+
+  public function delete(){
+    
+  }
 }
