@@ -46,9 +46,9 @@ return [
       'method' => 'GET'
     ]
   ],
-  'app/projects/edit/:id'=> [
+  'app/projects/edit/:id' => [
     'GET' => [
-      'controler' => 'AppCotroller',
+      'controller' => 'AppController',
       'action' => 'showEditProject',
       'method' => 'GET'
     ],
@@ -56,7 +56,7 @@ return [
       'controller' => 'AppController',
       'action' => 'editProject',
       'method' => 'POST'
-    ] 
+    ]
   ],
   'app/projects/delete/:id' => [
     'GET' => [
