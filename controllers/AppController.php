@@ -113,12 +113,10 @@ class AppController extends Controller
     }
 
     $task = new Task(null, $task_name, $task_description, $task_startDate, $task_finishDate, $project_id, $user_id);
-    
+
     $result = $task->save();
 
-    var_dump($result);
-
-    // $this->redirect('app/tasks?taskCreated');
+    $this->redirect('app/tasks?taskCreated');
   }
 
   public function createProject()
