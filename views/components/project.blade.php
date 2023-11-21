@@ -16,7 +16,7 @@
   $seconds = $difference->s;
 @endphp
 
-<article class="project-card">
+<article class="card">
     <h3 class="project-name">
       Proyecto {{ $name }}
     </h3>

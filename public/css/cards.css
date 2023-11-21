@@ -1,0 +1,34 @@
+:root {
+  --card-bg: #3e4551;
+  --button-bg: #533fce;
+}
+
+.card {
+  background-color: var(--card-bg);
+  padding: 1rem;
+  border-radius: 0.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.card-operation {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-decoration: none;
+  background-color: #533fce;
+  padding-inline: 0.5rem;
+  height: 2rem;
+}
+
+#tasks {
+  padding: 1rem;
+  gap: 1rem;
+}
+
+#projects {
+  padding: 1rem;
+  gap: 1rem;
+}

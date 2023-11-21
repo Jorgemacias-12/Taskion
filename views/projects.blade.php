@@ -5,7 +5,7 @@
 @push('styles')
   <link rel="stylesheet" href="/public/css/app.css">
   <link rel="stylesheet" href="/public/css/navigation.css">
-  <link rel="stylesheet" href="/public/css/projects.css">
+  <link rel="stylesheet" href="/public/css/cards.css">
 @endpush
 
 @push('scripts')
