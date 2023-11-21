@@ -110,9 +110,24 @@ class Task extends Model
     }
   }
 
-  public function read() 
+  public function read($id = null)
   {
+    $sql = "SELECT * FROM tasks";
 
+
+    if ($id !== null) {
+      $sql .= " WHERE id = ?";
+    }
+
+    if ($id !== null) {
+      $result = $this->db->executeQuery(true, $sql, [
+        $id
+      ]);
+    } else {
+      $result = $this->db->executeQuery(true, $sql, []);
+    }
+
+    return $result;
   }
 
   public function update()
