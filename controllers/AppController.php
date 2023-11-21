@@ -231,7 +231,7 @@ class AppController extends Controller
 
     $project = new Project($project_id, $project_name, $project_description, $project_startDate, $project_finishDate, $user_id);
 
-    $project->save();
+    $project->update();
     
     $this->redirect('app/projects?updatedProject');
   }
@@ -260,6 +260,39 @@ class AppController extends Controller
       $project->delete();
 
       $this->redirect("app/projects?projectDeleted");
+    } else {
+      // Maneja el caso en el que el 'id' no está presente
+      // echo "ID de proyecto no proporcionado";
+      $this->view("404", ['showHeader' => true]);
+    }
+  }
+
+  public function deleteTask()
+  {
+    if (!isset($_SESSION['user'])) {
+      $this->redirect("login");
+    }
+
+    // Obtén la URL de la superglobal $_GET
+    $url = $_GET['url'] ?? '';
+
+    // Divide la URL en partes usando '/'
+    $urlParts = explode('/', $url);
+
+    // Obtiene el último elemento del array como el valor de 'id'
+    $taskId = end($urlParts);
+
+    // Verifica si el 'id' está presente
+    if ($taskId !== false) {
+      // Realiza las operaciones necesarias con $projectId
+      // echo "Eliminando proyecto con ID: $projectId";
+      $task = new Task($taskId);
+
+      $result = $task->delete();
+
+      var_dump($result);
+
+      $this->redirect("app/tasks?projectDeleted");
     } else {
       // Maneja el caso en el que el 'id' no está presente
       // echo "ID de proyecto no proporcionado";

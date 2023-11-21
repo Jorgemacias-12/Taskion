@@ -127,6 +127,7 @@ class Project extends Model
   {
     try {
       $currentProject = $this->read($this->id);
+      $currentProject = $currentProject[0];
 
       if (!$currentProject) {
         throw new Exception("Project doesn't exist");
@@ -152,7 +153,7 @@ class Project extends Model
         return true;
       }
 
-      $sql = "UPDATE projects SET";
+      $sql = "UPDATE projects SET ";
       $updateValues = [];
 
       if ($this->name !== $currentProject->getName()) {
@@ -191,7 +192,6 @@ class Project extends Model
       throw new Error($e->getMessage(), 500);
     }
   }
-
 
   public function delete()
   {
