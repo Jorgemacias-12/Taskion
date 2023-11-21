@@ -158,6 +158,46 @@ class AppController extends Controller
     $this->redirect('app/projects?projectCreated');
   }
 
+  public function showEditProject()
+  {
+    if (!isset($_SESSION['user'])) {
+      $this->redirect("login");
+    }
+
+    echo "Si funciona";
+  }
+
+  public function deleteProject()
+  {
+    if (!isset($_SESSION['user'])) {
+      $this->redirect("login");
+    }
+
+    // Obtén la URL de la superglobal $_GET
+    $url = $_GET['url'] ?? '';
+
+    // Divide la URL en partes usando '/'
+    $urlParts = explode('/', $url);
+
+    // Obtiene el último elemento del array como el valor de 'id'
+    $projectId = end($urlParts);
+
+    // Verifica si el 'id' está presente
+    if ($projectId !== false) {
+      // Realiza las operaciones necesarias con $projectId
+      // echo "Eliminando proyecto con ID: $projectId";
+      $project = new Project($projectId);
+
+      $project->delete();
+
+      $this->redirect("app/projects?projectDeleted");
+    } else {
+      // Maneja el caso en el que el 'id' no está presente
+      // echo "ID de proyecto no proporcionado";
+      $this->view("404", ['showHeader' => true]);
+    }
+  }
+
   public function getProjectsData()
   {
     $project = new Project();
