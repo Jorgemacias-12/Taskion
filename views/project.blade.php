@@ -38,7 +38,8 @@
       Regresar a proyectos
     </a>
 
-    <form action="/app/projects/create" method="post" class="form flex col" id="create-project">
+    <form action="/app/projects/{{ $endpoint === 'edit' ? 'edit/' . $projectId : $endpoint }}" method="post" class="form flex col" id="create-project">
+
 
       <input type="hidden" name="user_id" value={{ $user->getId() }}>
 
