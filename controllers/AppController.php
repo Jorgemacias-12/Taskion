@@ -82,8 +82,8 @@ class AppController extends Controller
 
     $task_name = $_POST['task_name'] ?? null;
     $task_description = $_POST['task_description'] ?? null;
-    $task_startDate = $_POST['task_startDate'] ?? null;
-    $task_finishDate = $_POST['task_finishDate'] ?? null;
+    $task_startDate = date('Y-m-d', strtotime($_POST['task_startDate'])) ?? null;
+    $task_finishDate = date('Y-m-d', strtotime($_POST['task_finishDate'])) ?? null;
 
     $errors = new MessageBag();
 
@@ -112,11 +112,13 @@ class AppController extends Controller
       return;
     }
 
-    $task = new Task($task_name, $task_description, $task_startDate, $task_finishDate, $project_id, $user_id);
+    $task = new Task(null, $task_name, $task_description, $task_startDate, $task_finishDate, $project_id, $user_id);
+    
+    $result = $task->save();
 
-    $task->save();
+    var_dump($result);
 
-    $this->redirect('app/tasks?taskCreated');
+    // $this->redirect('app/tasks?taskCreated');
   }
 
   public function createProject()
