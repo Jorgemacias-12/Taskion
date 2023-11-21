@@ -68,7 +68,7 @@ class AppController extends Controller
 
     $projects = $this->getProjectsData();
 
-    $this->view('task', ['showHeader' => false, 'projects' => serialize($projects)]);
+    $this->view('task', ['showHeader' => false, 'projects' => serialize($projects), 'endpoint' => 'create']);
   }
 
   public function createTask()
@@ -108,7 +108,7 @@ class AppController extends Controller
     }
 
     if ($errors->isNotEmpty()) {
-      $this->view('task', ['showHeader' => false, 'errors' => serialize($errors), 'projects' => serialize($projects)]);
+      $this->view('task', ['showHeader' => false, 'errors' => serialize($errors), 'projects' => serialize($projects), 'endpoint' => 'create']);
       return;
     }
 
@@ -183,9 +183,40 @@ class AppController extends Controller
       $project['FinishDate'],
       $project['User_id'],
     );
-    
+
     $this->view('project', ['showHeader' => false, 'endpoint' => 'edit', 'projectId' => $projectId, 'project' => $project]);
 
+  }
+
+  public function showEditTask()
+  {
+    if (!isset($_SESSION['user'])) {
+      $this->redirect("login");
+    }
+
+    $projects = new Project();
+    $projects = $projects->read();
+
+    // Obtén la URL de la superglobal $_GET
+    $url = $_GET['url'] ?? '';
+
+    // Divide la URL en partes usando '/'
+    $urlParts = explode('/', $url);
+
+    $taskId = end($urlParts);
+
+    $task = new Task($taskId);
+    $task = $task->read($taskId)[0];
+    $task = new Task(
+      $task['id'],
+      $task['Name'],
+      $task['Description'],
+      $task['StartDate'],
+      $task['FinishDate'],
+      $task['Project_id'],
+    );
+
+    $this->view('task', ['showHeader' => false, 'endpoint' => 'edit', 'task' => $task, 'projects' => $projects]);
   }
 
   public function editProject()
@@ -234,6 +265,54 @@ class AppController extends Controller
     $project->update();
     
     $this->redirect('app/projects?updatedProject');
+  }
+
+  public function editTask()
+  {
+    // Obtén la URL de la superglobal $_GET
+    $url = $_GET['url'] ?? '';
+
+    // Divide la URL en partes usando '/'
+    $urlParts = explode('/', $url);
+
+    // Obtiene el último elemento del array como el valor de 'id'
+    $task_id = end($urlParts);
+
+    $user_id = $_POST['user_id'];
+
+    $task_name = $_POST['task_name'] ?? null;
+    $task_description = $_POST['task_description'] ?? null;
+    $task_startDate = date('Y-m-d', strtotime($_POST['task_startDate'])) ?? null;
+    $task_finishDate = date('Y-m-d', strtotime($_POST['task_finishDate'])) ?? null;
+
+    $errors = new MessageBag();
+
+    if (empty($task_name)) {
+      $errors->add('name', 'El campo de nombre de la tarea es obligatiorio');
+    }
+
+    if (empty($task_description)) {
+      $errors->add('description', 'El campo de descripción del la tarea es obligatirio');
+    }
+
+    if (empty($task_startDate)) {
+      $errors->add('startDate', 'La fecha de inicio es obligatoria.');
+    }
+
+    if (empty($task_finishDate)) {
+      $errors->add('finishDate', 'La fecha de fin es obligatoria');
+    }
+
+    if ($errors->isNotEmpty()) {
+      $this->view('project', ['showHeader' => false, 'errors' => serialize($errors)]);
+      return;
+    }
+
+    $task = new Task($task_id, $task_name, $task_description, $task_startDate, $task_finishDate, null, $user_id);
+
+    $task->update();
+
+    $this->redirect('app/task?updatedTask');
   }
 
   public function deleteProject()
