@@ -11,7 +11,6 @@ body {
 }
 
 .container {
-  background-color: #303030;
   padding: 1rem;
 }
 
@@ -53,8 +52,4 @@ body {
   background-repeat: no-repeat;
   background-position: right 0.5em center;
   background-size: 10px;
-}
-
-.create-task-container {
-  gap: 1rem;
 }
