@@ -139,7 +139,55 @@ class Task extends Model
 
   public function update()
   {
+    try {
+      $currentTask = $this->read($this->id);
+      $currentTask = $currentTask[0];
 
+      if (!$currentTask) {
+        throw new Exception("Task doesn't exist");
+      }
+
+      $sql = "UPDATE tasks SET ";
+      $updateValues = [];
+
+      if ($this->name !== $currentTask['Name']) {
+        $sql .= "Name = ?, ";
+        $updateValues[] = $this->name;
+      }
+
+      if ($this->description !== $currentTask['Description']) {
+        $sql .= "Description = ?, ";
+        $updateValues[] = $this->description;
+      }
+
+      if ($this->startDate !== $currentTask['StartDate']) {
+        $sql .= "StartDate = ?, ";
+        $updateValues[] = $this->startDate;
+      }
+
+      if ($this->finishDate !== $currentTask['FinishDate']) {
+        $sql .= "FinishDate = ?, ";
+        $updateValues[] = $this->finishDate;
+      }
+
+      if ($this->userId !== $currentTask['User_id']) {
+        $sql .= "User_id = ?, ";
+        $updateValues[] = $this->userId;
+      }
+
+      // No modificamos Project_id
+
+      // Agrega más condiciones para otros campos...
+
+      $sql = rtrim($sql, ', ');
+      $sql .= " WHERE id = ?";
+
+      $updateValues[] = $this->id;
+
+      return $this->db->executeQuery(false, $sql, $updateValues);
+    } catch (Exception $e) {
+      throw new Exception($e->getMessage(), 500);
+    }
   }
 
   public function delete()
