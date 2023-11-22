@@ -31,7 +31,7 @@
 
   <section class="create-project-container flex col">
     <h2 class="title">
-      Crear proyecto
+      {{ $endpoint !== 'create' ? 'Editar proyecto' : 'Crear proyecto'}}
     </h2>
 
     <a href="/app/projects" class="link">
@@ -89,7 +89,7 @@
   
       <section class="form-group">
         <button type="submit" class="button">
-          Crear proyecto
+          {{ $endpoint !== 'create' ? 'Editar proyecto' : 'Crear proyecto'}}
         </button>
       </section>
 
