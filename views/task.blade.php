@@ -35,7 +35,7 @@
   <section class="create-task-container flex col">
 
     <h2 class="title">
-      Crear tarea
+      {{ $endpoint !== "create" ?  'Editar tarea' : 'Crear tarea' }}
     </h2>
 
     <a href="/app/tasks" class="link">
@@ -109,7 +109,7 @@
 
       <section class="form-group">
         <button class="button" type="submit">
-          Crear tarea
+          {{ $endpoint !== "create" ?  'Editar tarea' : 'Crear tarea' }}
         </button>
       </section>
 
