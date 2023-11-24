@@ -82,7 +82,7 @@ class AppController extends Controller
 
     $task_name = $_POST['task_name'] ?? null;
     $task_description = $_POST['task_description'] ?? null;
-    
+
     $task_startDate = !empty($_POST['task_startDate']) && strtotime($_POST['task_startDate'])
       ? date('Y-m-d', strtotime($_POST['task_startDate']))
       : null;
@@ -326,7 +326,7 @@ class AppController extends Controller
     }
 
     if ($errors->isNotEmpty()) {
-      $this->view('project', ['showHeader' => false, 'errors' => serialize($errors)]);
+      $this->view('project', ['showHeader' => false, 'errors' => serialize($errors), 'endpoint' => 'edit']);
       return;
     }
 
