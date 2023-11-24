@@ -326,7 +326,7 @@ class AppController extends Controller
     }
 
     if ($errors->isNotEmpty()) {
-      $this->view('project', ['showHeader' => false, 'errors' => serialize($errors), 'endpoint' => 'edit']);
+      $this->view('task', ['showHeader' => false, 'errors' => serialize($errors), 'endpoint' => 'edit']);
       return;
     }
 
