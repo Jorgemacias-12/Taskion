@@ -1,23 +1,85 @@
+.content {
+  display: grid;
+  grid-template-columns: 25rem auto;
+  /* display: flex;
+  flex-direction: row; */
+}
+
+.profile-about {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  flex-direction: column;
+  /* background-color: #3e4551; */
+  gap: 1rem;
+}
+
+.profile-data  {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.profile-name {
+  text-align: center;
+  white-space: nowrap;
+}
+
+.profile-username {
+  font-weight: normal;
+  color: #ccc;
+}
+
+.profile-edit-button {
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  background-color:#533fce;
+  height: 2.5rem;
+  width: 100%;
+  color: white;
+  text-decoration: none;
+}
+
+.avatar-container {
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+}
+
 .profile-avatar {
   width: 256px;
   height: 256px;
+  aspect-ratio: 16 / 9;
   border-radius: 100%;
 }
 
-.userInfo {
-  padding: 1rem;
-  padding-left: 5rem;
-  background-color: #3e4551;
+.user-about-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
-.form {
-  background-color: transparent;
+
+.user-name,
+.user-username,
+.user-email{
+  text-align: center;
 }
 
-.input {
-  background-color: transparent; 
+
+.button {
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  text-decoration: none;
 }
 
-.input:hover {
-  background-color: #3e4551;
+.profile-email {
+  color: white;
+  text-decoration: none;
+}
+
+.profile-email:hover {
+  text-decoration: underline;
 }
