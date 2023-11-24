@@ -22,19 +22,40 @@
 @endsection
 
 @section('content')
+  <section class="profile-about">
+    
+    <picture>
+      <img class="profile-avatar" title="user avatar" src="data:image/png;base64,{{ $user->getAvatar() }}"
+                    alt="user avatar">
+    </picture>
 
-  <form action="/app/user/edit" method="POST" class="form" 
-  enctype="multipart/form-data">
+    <section class="profile-data">
 
-    <section class="form-group">
-      <input class='input' type="text" name="name" id="name" value="{{ $user->getName() }}">
-      @if (isset($errors) && $errors->has('name'))
-        <p class="error">
-          <span class="close fas fa-times"></span>
-          {{ $errors->first('name') }}
-        </p>
-      @endif
+      <h2 class="profile-name">
+        {{ $user->getName() }}
+      </h2>
+
+      <h4 class="profile-username">
+        <span class="fas fa-user"></span>
+        {{ $user->getUsername() }}
+      </h4>
+
+      <a href="mailto:{{$user->getEmail()}}" class="profile-email">
+        <span class="fas fa-envelope"></span>
+        {{ $user->getEmail() }}
+      </a>
+      
     </section>
+    
+    <a href="/app/user/edit" class="profile-edit-button">
+      Editar perfil
+    </a>
 
-  </form>
+  </section>
+
+  <section class="user-projects-and-tasks">
+
+    <h2>Proyectos y tareas</h2>
+
+  </section>
 @endsection
