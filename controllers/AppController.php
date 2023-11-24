@@ -173,6 +173,9 @@ class AppController extends Controller
       $this->redirect("login");
     }
 
+    // Get user_id 
+    $user = $_SESSION['user'];
+
     // Obtén la URL de la superglobal $_GET
     $url = $_GET['url'] ?? '';
 
@@ -183,7 +186,7 @@ class AppController extends Controller
     $projectId = end($urlParts);
 
     $project = new Project($projectId);
-    $project = $project->read($projectId)[0];
+    $project = $project->read($projectId, $user->getId())[0];
     $project = new Project(
       $project['id'],
       $project['Name'],
@@ -203,8 +206,10 @@ class AppController extends Controller
       $this->redirect("login");
     }
 
+    $user = $_SESSION['user'];
+
     $projects = new Project();
-    $projects = $projects->read();
+    $projects = $projects->read(null, $user->getId());
 
     // Obtén la URL de la superglobal $_GET
     $url = $_GET['url'] ?? '';
@@ -412,9 +417,11 @@ class AppController extends Controller
 
   public function getProjectsData()
   {
+    $user = isset($_SESSION['user']) ? unserialize($_SESSION['user']) : null;
+
     $project = new Project();
 
-    return $project->read();
+    return $project->read(null, $user->getId());
   }
 
   public function getTasksData()

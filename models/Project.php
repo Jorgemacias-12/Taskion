@@ -101,7 +101,7 @@ class Project extends Model
     }
   }
 
-  public function read($id = null)
+  public function read($id = null, $user_id = null) 
   {
     $sql = "SELECT * FROM projects WHERE User_id = ?";
 
@@ -115,7 +115,7 @@ class Project extends Model
       ]);
     } else {
       $result = $this->db->executeQuery(true, $sql, [
-        $this->createdByUser
+        $user_id
       ]);
     }
 
