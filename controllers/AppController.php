@@ -209,7 +209,7 @@ class AppController extends Controller
       $this->redirect("login");
     }
 
-    $user = $_SESSION['user'];
+    $user = isset($_SESSION['user']) ? unserialize($_SESSION['user']) : null;
 
     $projects = new Project();
     $projects = $projects->read(null, $user->getId());
@@ -223,7 +223,7 @@ class AppController extends Controller
     $taskId = end($urlParts);
 
     $task = new Task($taskId);
-    $task = $task->read($taskId)[0];
+    $task = $task->read($user->getId(), $taskId)[0];
     $task = new Task(
       $task['id'],
       $task['Name'],
@@ -429,8 +429,10 @@ class AppController extends Controller
 
   public function getTasksData()
   {
+    $user = isset($_SESSION['user']) ? unserialize($_SESSION['user']) : null;
+
     $task = new Task();
 
-    return $task->read();
+    return $task->read($user->getId(), null);
   }
 }

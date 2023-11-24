@@ -117,22 +117,24 @@ class Task extends Model
     }
   }
 
-  public function read($id = null)
+  public function read($user_id = null, $task_id = null)
   {
-    $sql = "SELECT * FROM tasks";
+    // La consulta base selecciona tareas asociadas al user_id a través de la tabla de proyectos
+    $sql = "SELECT tasks.* FROM tasks 
+            JOIN projects ON tasks.project_id = projects.id 
+            WHERE projects.user_id = ?";
 
+    // Parámetros para la consulta SQL
+    $params = [$user_id];
 
-    if ($id !== null) {
-      $sql .= " WHERE id = ?";
+    // Si se proporcionó un id de tarea, agregarlo como condición
+    if ($task_id !== null) {
+      $sql .= " AND tasks.id = ?";
+      $params[] = $task_id;
     }
 
-    if ($id !== null) {
-      $result = $this->db->executeQuery(true, $sql, [
-        $id
-      ]);
-    } else {
-      $result = $this->db->executeQuery(true, $sql, []);
-    }
+    // Ejecuta la consulta con los parámetros
+    $result = $this->db->executeQuery(true, $sql, $params);
 
     return $result;
   }
@@ -140,7 +142,10 @@ class Task extends Model
   public function update()
   {
     try {
-      $currentTask = $this->read($this->id);  // Suponiendo que tengas un método read en la clase Task
+
+      $user = isset($_SESSION['user']) ? unserialize($_SESSION['user']) : null;
+
+      $currentTask = $this->read($user->getId(), $this->id);  // Suponiendo que tengas un método read en la clase Task
       $currentTask = $currentTask[0];
 
       if (!$currentTask) {
