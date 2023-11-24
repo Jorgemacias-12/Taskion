@@ -282,6 +282,8 @@ class AppController extends Controller
 
   public function editTask()
   {
+    $projects = $this->getProjectsData();
+
     // Obtén la URL de la superglobal $_GET
     $url = $_GET['url'] ?? '';
 
@@ -326,7 +328,7 @@ class AppController extends Controller
     }
 
     if ($errors->isNotEmpty()) {
-      $this->view('task', ['showHeader' => false, 'errors' => serialize($errors), 'endpoint' => 'edit']);
+      $this->view('task', ['showHeader' => false, 'errors' => serialize($errors), 'endpoint' => 'edit', 'projects' => $projects]);
       return;
     }
 
