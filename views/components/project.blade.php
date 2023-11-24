@@ -27,14 +27,17 @@
 
     <section class="project-dates">
         <p class="project-start">
+          <span class="fas fa-calendar"></span>
           Fecha inicio: {{ $startDate }}
         </p>
-
+        
         <p class="project-actual">
+          <span class="fas fa-calendar"></span>
           Tiempo restante: {{ $days }} días, {{ $hours }} horas, {{ $minutes }} minutos, {{ $seconds }} segundos
         </p>
-
+        
         <p class="project-finish">
+          <span class="fas fa-calendar"></span>
           Fecha fin: {{ $finishDate->format('Y-m-d') }}
         </p>
     </section>
