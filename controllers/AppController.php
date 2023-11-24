@@ -82,8 +82,13 @@ class AppController extends Controller
 
     $task_name = $_POST['task_name'] ?? null;
     $task_description = $_POST['task_description'] ?? null;
-    $task_startDate = date('Y-m-d', strtotime($_POST['task_startDate'])) ?? null;
-    $task_finishDate = date('Y-m-d', strtotime($_POST['task_finishDate'])) ?? null;
+    
+    $task_startDate = !empty($_POST['task_startDate']) && strtotime($_POST['task_startDate'])
+      ? date('Y-m-d', strtotime($_POST['task_startDate']))
+      : null;
+    $task_finishDate = !empty($_POST['task_finishDate']) && strtotime($_POST['task_finishDate'])
+      ? date('Y-m-d', strtotime($_POST['task_finishDate']))
+      : null;
 
     $errors = new MessageBag();
 
@@ -238,8 +243,12 @@ class AppController extends Controller
 
     $project_name = $_POST['project_name'] ?? null;
     $project_description = $_POST['project_description'] ?? null;
-    $project_startDate = date('Y-m-d', strtotime($_POST['project_startDate'])) ?? null;
-    $project_finishDate = date('Y-m-d', strtotime($_POST['project_finishDate'])) ?? null;
+    $project_startDate = !empty($_POST['project_startDate']) && strtotime($_POST['project_startDate'])
+      ? date('Y-m-d', strtotime($_POST['project_startDate']))
+      : null;
+    $project_finishDate = !empty($_POST['project_finishDate']) && strtotime($_POST['project_finishDate'])
+      ? date('Y-m-d', strtotime($_POST['project_finishDate']))
+      : null;
 
     $errors = new MessageBag();
 
@@ -286,8 +295,13 @@ class AppController extends Controller
 
     $task_name = $_POST['task_name'] ?? null;
     $task_description = $_POST['task_description'] ?? null;
-    $task_startDate = date('Y-m-d', strtotime($_POST['task_startDate'])) ?? null;
-    $task_finishDate = date('Y-m-d', strtotime($_POST['task_finishDate'])) ?? null;
+
+    $task_startDate = !empty($_POST['task_startDate']) && strtotime($_POST['task_startDate'])
+      ? date('Y-m-d', strtotime($_POST['task_startDate']))
+      : null;
+    $task_finishDate = !empty($_POST['task_finishDate']) && strtotime($_POST['task_finishDate'])
+      ? date('Y-m-d', strtotime($_POST['task_finishDate']))
+      : null;
 
     $errors = new MessageBag();
 
