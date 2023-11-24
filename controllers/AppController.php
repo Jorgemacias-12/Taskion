@@ -147,7 +147,7 @@ class AppController extends Controller
     }
 
     if ($errors->isNotEmpty()) {
-      $this->view('project', ['showHeader' => false, 'errors' => serialize($errors)]);
+      $this->view('project', ['showHeader' => false, 'errors' => serialize($errors), 'endpoint' => 'create']);
       return;
     }
 
