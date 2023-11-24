@@ -101,23 +101,23 @@ class Project extends Model
     }
   }
 
-  public function read($id = null, $user_id = null) 
+  public function read($id = null, $user_id = null)
   {
+    // Asegúrate de que el $user_id está siempre presente como es requerido por la consulta base.
+    if ($user_id === null) {
+      throw new InvalidArgumentException('User ID is required.');
+    }
+
     $sql = "SELECT * FROM projects WHERE User_id = ?";
+    $params = [$user_id]; // Inicializa con user_id que siempre debería estar presente.
 
     if ($id !== null) {
       $sql .= " AND id = ?";
+      $params[] = $id; // Agrega id a los parámetros si no es null.
     }
 
-    if ($id !== null) {
-      $result = $this->db->executeQuery(true, $sql, [
-        $id
-      ]);
-    } else {
-      $result = $this->db->executeQuery(true, $sql, [
-        $user_id
-      ]);
-    }
+    // Ya que ahora $params siempre tendrá al menos un elemento, no necesitas el condicional.
+    $result = $this->db->executeQuery(true, $sql, $params);
 
     return $result;
   }
@@ -125,7 +125,10 @@ class Project extends Model
   public function update()
   {
     try {
-      $currentProject = $this->read($this->id);
+
+      $user = isset($_SESSION['user']) ? unserialize($_SESSION['user']) : null;
+
+      $currentProject = $this->read($this->id, $user->getId());
       $currentProject = $currentProject[0];
 
       if (!$currentProject) {
