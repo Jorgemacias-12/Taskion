@@ -39,6 +39,32 @@ return [
       'method' => 'GET'
     ]
   ],
+  'app/user' => [
+    'GET' => [
+      'controller' => 'UserController',
+      'action' => 'showUserProfile',
+      'method' => 'GET'
+    ]
+  ],
+  'app/user/:id' => [
+    'GET' => [
+      'controller' => 'UserController',
+      'action' => 'showUserProfile',
+      'method' => 'GET'
+    ],
+    'POST' => [
+      'controller' => 'UserController',
+      'action' => 'editUserProfile',
+      'method' => 'POST'
+    ]
+  ],
+  'app/user/edit' => [
+    'GET' => [
+      'controller' => 'UserController',
+      'action' => 'showUserProfileEdit',
+      'method' => 'GET'
+    ]
+  ],
   'app/projects' => [
     'GET' => [
       'controller' => 'AppController',
@@ -115,12 +141,5 @@ return [
       'method' => 'POST'
     ]
   ],
-  'app/user/edit' => [
-    'GET' => [
-      'controller' => 'UserController',
-      'action' => 'showUserProfile',
-      'method' => 'GET'
-    ]
-  ]
   // Más rutas...
 ];
