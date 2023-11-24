@@ -216,7 +216,7 @@ class AppController extends Controller
       $task['Project_id'],
     );
 
-    $this->view('task', ['showHeader' => false, 'endpoint' => 'edit', 'task' => $task, 'projects' => $projects]);
+    $this->view('task', ['showHeader' => false, 'endpoint' => 'edit', 'task' => $task, 'projects' => $projects, 'taskId' => $taskId]);
   }
 
   public function editProject()
@@ -278,7 +278,7 @@ class AppController extends Controller
     // Obtiene el último elemento del array como el valor de 'id'
     $task_id = end($urlParts);
 
-    $user_id = $_POST['user_id'];
+    $project_id = $_POST['project_id'] ?? null;
 
     $task_name = $_POST['task_name'] ?? null;
     $task_description = $_POST['task_description'] ?? null;
@@ -286,6 +286,10 @@ class AppController extends Controller
     $task_finishDate = date('Y-m-d', strtotime($_POST['task_finishDate'])) ?? null;
 
     $errors = new MessageBag();
+
+    if (empty($project_id)) {
+      $errors->add('project', 'Seleciona un proyecto para continuar');
+    } 
 
     if (empty($task_name)) {
       $errors->add('name', 'El campo de nombre de la tarea es obligatiorio');
@@ -308,11 +312,18 @@ class AppController extends Controller
       return;
     }
 
-    $task = new Task($task_id, $task_name, $task_description, $task_startDate, $task_finishDate, null, $user_id);
+    $task = new Task(
+      $task_id,
+      $task_name,
+      $task_description,
+      $task_startDate,
+      $task_finishDate,
+      $project_id
+    );
 
     $task->update();
 
-    $this->redirect('app/task?updatedTask');
+    $this->redirect('app/tasks?updatedTask');
   }
 
   public function deleteProject()

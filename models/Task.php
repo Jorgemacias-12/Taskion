@@ -140,55 +140,73 @@ class Task extends Model
   public function update()
   {
     try {
-      $currentTask = $this->read($this->id);
+      $currentTask = $this->read($this->id);  // Suponiendo que tengas un método read en la clase Task
       $currentTask = $currentTask[0];
 
       if (!$currentTask) {
         throw new Exception("Task doesn't exist");
       }
 
+      $currentTask = new Task(
+        $currentTask['id'],
+        $currentTask['Name'],
+        $currentTask['Description'],
+        $currentTask['StartDate'],
+        $currentTask['FinishDate'],
+        $currentTask['Project_id']
+      );
+
+      // Compara los valores actuales con los nuevos
+      if (
+        $this->name === $currentTask->getName() &&
+        $this->description === $currentTask->getDescription() &&
+        $this->startDate === $currentTask->getStartDate() &&
+        $this->finishDate === $currentTask->getFinishDate() &&
+        $this->createdInProject === $currentTask->getCreatedInProject()
+      ) {
+        return true;
+      }
+
       $sql = "UPDATE tasks SET ";
       $updateValues = [];
 
-      if ($this->name !== $currentTask['Name']) {
+      if ($this->name !== $currentTask->getName()) {
         $sql .= "Name = ?, ";
         $updateValues[] = $this->name;
       }
 
-      if ($this->description !== $currentTask['Description']) {
+      if ($this->description !== $currentTask->getDescription()) {
         $sql .= "Description = ?, ";
         $updateValues[] = $this->description;
       }
 
-      if ($this->startDate !== $currentTask['StartDate']) {
+      if ($this->startDate !== $currentTask->getStartDate()) {
         $sql .= "StartDate = ?, ";
         $updateValues[] = $this->startDate;
       }
 
-      if ($this->finishDate !== $currentTask['FinishDate']) {
+      if ($this->finishDate !== $currentTask->getFinishDate()) {
         $sql .= "FinishDate = ?, ";
         $updateValues[] = $this->finishDate;
       }
 
-      if ($this->userId !== $currentTask['User_id']) {
-        $sql .= "User_id = ?, ";
-        $updateValues[] = $this->userId;
+      if ($this->createdInProject !== $currentTask->getCreatedInProject()) {
+        $sql .= "Project_id = ?, ";
+        $updateValues[] = $this->createdInProject;
       }
 
-      // No modificamos Project_id
-
-      // Agrega más condiciones para otros campos...
-
       $sql = rtrim($sql, ', ');
+
       $sql .= " WHERE id = ?";
 
       $updateValues[] = $this->id;
 
       return $this->db->executeQuery(false, $sql, $updateValues);
     } catch (Exception $e) {
-      throw new Exception($e->getMessage(), 500);
+      throw new Error($e->getMessage(), 500);
     }
   }
+
 
   public function delete()
   {
