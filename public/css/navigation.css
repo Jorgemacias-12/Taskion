@@ -32,7 +32,8 @@
 }
 
 .dropdown {
-  display: none;
+  display: flex;
+  overflow: hidden;
   flex-direction: column;
   width: 15rem;
   list-style: none;
@@ -42,10 +43,14 @@
   right: 0rem;
   background-color: var(--header-bg-50);
   border-radius: 0.2rem;
+  transition: max-height 0.4s ease, opacity 0.4s ease;
+  max-height: 0;
+  opacity: 0;
 }
 
 .dropdown.show {
-  display: flex;
+  max-height: 500px;
+  opacity: 1;
 }
 
 .dropdown-item {
