@@ -172,9 +172,9 @@ class AppController extends Controller
     if (!isset($_SESSION['user'])) {
       $this->redirect("login");
     }
-
+    
     // Get user_id 
-    $user = $_SESSION['user'];
+    $user = isset($_SESSION['user']) ? unserialize($_SESSION['user']) : null;
 
     // Obtén la URL de la superglobal $_GET
     $url = $_GET['url'] ?? '';
@@ -184,9 +184,12 @@ class AppController extends Controller
 
     // Obtiene el último elemento del array como el valor de 'id'
     $projectId = end($urlParts);
+    $user_id = $user->getId();
 
     $project = new Project($projectId);
-    $project = $project->read($projectId, $user->getId())[0];
+
+    $project = $project->read($projectId, $user_id)[0];
+
     $project = new Project(
       $project['id'],
       $project['Name'],
