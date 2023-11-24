@@ -50,7 +50,7 @@
       <section class="form-group">
         <label for="" class="caption">Proyecto</label>
         <select class="select" name="project_id" id="project-id">
-          <option value="" selected disable>Selecciona un proyecto</option>
+          <option value="" selected disabled>Selecciona un proyecto</option>
           @foreach ($projects as $project => $projectValue)
             <option value="{{ $projectValue['id'] }}">{{ $projectValue['Name'] }}</option>
           @endforeach
