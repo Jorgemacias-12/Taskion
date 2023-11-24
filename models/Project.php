@@ -103,11 +103,10 @@ class Project extends Model
 
   public function read($id = null)
   {
-    $sql = "SELECT * FROM projects";
-
+    $sql = "SELECT * FROM projects WHERE User_id = ?";
 
     if ($id !== null) {
-      $sql .= " WHERE id = ?";
+      $sql .= " AND id = ?";
     }
 
     if ($id !== null) {
@@ -115,7 +114,9 @@ class Project extends Model
         $id
       ]);
     } else {
-      $result = $this->db->executeQuery(true, $sql, []);
+      $result = $this->db->executeQuery(true, $sql, [
+        $this->createdByUser
+      ]);
     }
 
     return $result;
