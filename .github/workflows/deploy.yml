@@ -1,34 +1,30 @@
-name: Deploy PHP Application
-
-on:
-  push:
-    branches:
-      - main
-
+on: push
+name: 🚀 Deploy PHP Application on Push
 jobs:
-  FTP-Deploy-Action:
-    name: FTP Deploy Action
+  php-deploy:
+    name: 🎉 Deploy
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout Code
+    - name: 🚚 Get latest code
       uses: actions/checkout@v3
-      with:
-        fetch-depth: 0 # Realiza un clon completo del repositorio
 
-    - name: Setup PHP
+    - name: 🛠️ Setup PHP
       uses: shivammathur/setup-php@v2
       with:
         php-version: '8.2'
         extensions: mbstring, xml, ctype, iconv, intl, pdo, pdo_mysql
         coverage: none
 
-    - name: Install Dependencies
+    - name: 🧰 Install Composer Dependencies
       run: composer install --no-progress --prefer-dist
 
-    - name: FTP-Deploy-Action
-      uses: SamKirkland/FTP-Deploy-Action@3.1.1
+    # Si tienes pasos de construcción o preparación adicionales para tu aplicación PHP, agrégalos aquí
+
+    - name: 📂 Sync files
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
       with:
-        ftp-server: ${{ secrets.FTP_SERVER }}
-        ftp-username: ${{ secrets.FTP_USERNAME }}
-        ftp-password: ${{ secrets.FTP_PASSWORD }}
-        # Asegúrate de que la ruta esté correcta y que la carpeta exista en tu repositorio
+        server: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        local-dir: ./ # Asegúrate de que esta ruta sea correcta y que la carpeta exista en tu repositorio
+        # Si necesitas subir un subdirectorio específico de tu proyecto PHP, ajusta local-dir en consecuencia
