@@ -18,7 +18,15 @@ jobs:
     - name: 🧰 Install Composer Dependencies
       run: composer install --no-progress --prefer-dist
 
-    # Si tienes pasos de construcción o preparación adicionales para tu aplicación PHP, agrégalos aquí
+    # Paso para crear el archivo .env
+    - name: Create .env file
+      run: |
+        echo "APP_ENV=production" >> .env
+        echo "DB_HOST=${{ secrets.DB_HOST }}" >> .env
+        echo "DB_NAME=${{ secrets.DB_NAME }}" >> .env
+        echo "DB_USER=${{ secrets.DB_USER }}" >> .env
+        echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
+        # Agrega aquí otras variables de entorno necesarias para tu aplicación
 
     - name: 📂 Sync files
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4
@@ -26,5 +34,5 @@ jobs:
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        local-dir: ./ # Asegúrate de que esta ruta sea correcta y que la carpeta exista en tu repositorio
-        # Si necesitas subir un subdirectorio específico de tu proyecto PHP, ajusta local-dir en consecuencia
+        local-dir: ./
+        # Asegúrate de que la ruta esté correcta y que la carpeta exista en tu repositorio
