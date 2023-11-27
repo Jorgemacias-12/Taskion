@@ -2,9 +2,7 @@ on:
   push:
     branches:
       - main
-    paths-ignore:
-      - '**/[skip ci]'
-
+    
 name: 🚀 Deploy PHP Application on Push
 
 jobs:
