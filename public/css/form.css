@@ -15,7 +15,6 @@
 
 .container {
   padding: 1rem;
-  gap: 1rem;
 }
 
 .title {
@@ -25,18 +24,19 @@
 
 .form {
   background-color: #ededed;
-  padding: 1rem;
+  display: flex;
   margin: 0 auto;
-  width: 100%;
+  width: calc(100vw - 1rem);
   border-radius: 0.2rem;
+  padding: 0.5rem;
   gap: 1rem;
-  width: fit-content;
+  margin-bottom: 1rem;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.3rem;
 }
 
 .input {
@@ -52,29 +52,18 @@
   border: 0.1rem solid var(--input-border-hover-color)
 }
 
-.avatar {
-  width: 100%;
-  height: 100%;
-}
-
 .button {
   background-color: var(--button-bg);
-  border: 0.1rem solid transparent;
   color: white;
-  border-radius: 0.2rem;
-  display: block;
+  border: 0.1rem solid transparent;
   height: 2.5rem;
+  cursor: pointer;
   margin: 0 auto;
   padding-inline: 1rem;
 }
 
 .button:hover {
   background-color: var(--button-bg-hv);
-  cursor: pointer;
-}
-
-.close {
-  color: black;
 }
 
 .error {
@@ -85,7 +74,7 @@
 }
 
 .error .close:hover {
-  color: var(--error-fg);
+  color: black;
   cursor: pointer;
   transition: 0.5s all;
 }
@@ -103,6 +92,10 @@
   transition: 0.5s all;
 }
 
+.avatar {
+  width: 100%;
+  height: 100%;
+}
 
 .avatar-preview {
   border: 0.1rem solid var(--input-border-color);
@@ -114,9 +107,8 @@
   display: block;
 }
 
-
-@media screen and (min-width: 978px) {
+@media screen and (min-width: 1200px) {
   .form {
-    width: 25rem;
+    width: 25%;
   }
 }

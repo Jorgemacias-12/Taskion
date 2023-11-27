@@ -10,6 +10,7 @@
 
 @push('scripts')
   <script defer src="/public/js/app.js"></script>
+  <script defer src="/public/js/form.js"></script>
 @endpush
 
 @php
@@ -52,7 +53,7 @@
         <select class="select" name="project_id" id="project-id">
           <option value="" {{ $endpoint == "create" ? 'selected disabled' : 'disabled'}}>Selecciona un proyecto</option>
           @foreach ($projects as $project => $projectValue)
-            <option value="{{ $projectValue['id'] }}" {{ $task->getCreatedInProject() == $projectValue['id'] ? 'selected' : '' }}>{{ $projectValue['Name'] }}</option>
+            <option value="{{ $projectValue['id'] }}" {{ $endpoint == "edit" && $task->getCreatedInProject() == $projectValue['id'] ? 'selected' : '' }}>{{ $projectValue['Name'] }}</option>
           @endforeach
         </select>
         @if (isset($errors) && $errors->has('project'))
@@ -87,7 +88,7 @@
 
       <section class="form-group">
         <label for="" class="label">Fecha de inicio</label>
-        <input class="input" type="date" name="task_startDate" id="" value="{{ isset($task) ? $task->getStartDate() : '' }}">
+        <input type="text" class="input" id="startDate" name="task_startDate" value="{{ isset($task) ? $task->getStartDate() : '' }}">
         @if (isset($errors) && $errors->has('startDate'))
           <p class="error">
             <span class="close fas fa-times"></span>
@@ -98,7 +99,7 @@
       
       <section class="form-group">
         <label for="" class="label">Fecha de termino</label>
-        <input class="input" type="date" name="task_finishDate" id="" value="{{ isset($task) ? $task->getFinishDate() : '' }}">
+        <input type="text" class="input" id="finishDate" name="task_finishDate" value="{{ isset($task) ? $task->getFinishDate() : '' }}">
         @if (isset($errors) && $errors->has('finishDate'))
           <p class="error">
             <span class="close fas fa-times"></span>

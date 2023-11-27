@@ -1,3 +1,11 @@
+:root {
+  --error-fg: #a82525;
+  --error-bg: #f1d4d4;
+
+  --success-fg: #0c5626;
+  --sucess-bg: #a5efbf;
+}
+
 body {
   background-color: #21252b;
 }
@@ -52,4 +60,14 @@ body {
   background-repeat: no-repeat;
   background-position: right 0.5em center;
   background-size: 10px;
+}
+
+.success {
+  padding: 1rem;
+  background-color: var(--sucess-bg);
+  color: var(--success-fg);
+}
+
+.success .close {
+  cursor: pointer;
 }

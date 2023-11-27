@@ -34,7 +34,7 @@
     </p>
   @endif
 
-  @if (isset($_GET['projectUpdated']))
+  @if (isset($_GET['updatedProject']))
     <p class="success">
       <span class="close fas fa-times"></span>
       ¡Proyecto actualizado!

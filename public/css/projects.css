@@ -44,7 +44,7 @@ body {
   background-color: var(--header-bg-50);
   color: white;
   border: 0.1rem solid transparent;
-  width: 10%;
+  padding-inline: 0.5rem;
   margin: 0 auto;
   cursor: pointer;
 }
