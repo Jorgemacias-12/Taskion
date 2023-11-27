@@ -32,6 +32,20 @@
     </p>
   @endif
 
+  @if (isset($_GET['updatedTask']))
+    <p class="success">
+      <span class="close fas fa-times"></span>
+      ¡Tarea actualizada correctamente!
+    </p>
+  @endif
+  
+  @if (isset($_GET['taskDeleted']))
+    <p class="success">
+      <span class="close fas fa-times"></span>
+      ¡Tarea eliminada correctamente!
+    </p>
+  @endif
+
   <section class="links">
       
     <a href="/app/" class="link">

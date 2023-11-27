@@ -410,7 +410,7 @@ class AppController extends Controller
 
       // var_dump($result);
 
-      $this->redirect("app/tasks?projectDeleted");
+      $this->redirect("app/tasks?taskDeleted");
     } else {
       // Maneja el caso en el que el 'id' no está presente
       // echo "ID de proyecto no proporcionado";
