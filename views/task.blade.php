@@ -52,7 +52,7 @@
         <select class="select" name="project_id" id="project-id">
           <option value="" {{ $endpoint == "create" ? 'selected disabled' : 'disabled'}}>Selecciona un proyecto</option>
           @foreach ($projects as $project => $projectValue)
-            <option value="{{ $projectValue['id'] }}" {{ $task->getCreatedInProject() == $projectValue['id'] ? 'selected' : '' }}>{{ $projectValue['Name'] }}</option>
+            <option value="{{ $projectValue['id'] }}" {{ $endpoint == "edit" && $task->getCreatedInProject() == $projectValue['id'] ? 'selected' : '' }}>{{ $projectValue['Name'] }}</option>
           @endforeach
         </select>
         @if (isset($errors) && $errors->has('project'))
