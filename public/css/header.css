@@ -94,14 +94,10 @@
     align-items: center;
   }
 
-  .nav-list {
-    gap: 1rem;
-  }
-
   .nav-link {
     height: 100%;
     text-wrap: nowrap;
-    height: 2rem;
+    height: 3rem;
     padding-inline: 0.5rem;
   }
 
