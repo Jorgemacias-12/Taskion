@@ -10,6 +10,7 @@
 
 @push('scripts')
   <script defer src="/public/js/app.js"></script>
+  <script defer src="/public/js/form.js"></script>
 @endpush
 
 @php
@@ -67,7 +68,7 @@
 
       <section class="form-group">
         <label for="" class="label">Fecha de inicio</label>
-        <input class="input" type="date" name="project_startDate" id="" value="{{ isset($project) ? $project->getStartDate() : '' }}">
+        <input type="text" class="input" id="startDate" name="project_startDate" value="{{ isset($project) ? $project->getStartDate() : '' }}">
         @if (isset($errors) && $errors->has('startDate'))
           <p class="error">
             <span class="close fas fa-times"></span>
@@ -78,7 +79,7 @@
       
       <section class="form-group">
         <label for="" class="label">Fecha de termino</label>
-        <input class="input" type="date" name="project_finishDate" id="" value="{{ isset($project) ? $project->getFinishDate() : '' }}">
+        <input type="text" class="input" id="finishDate" name="project_finishDate" value="{{ isset($project) ? $project->getFinishDate() : '' }}">
         @if (isset($errors) && $errors->has('finishDate'))
           <p class="error">
             <span class="close fas fa-times"></span>
