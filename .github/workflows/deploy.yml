@@ -2,7 +2,8 @@ on:
   push:
     branches:
       - main
-    
+  workflow_dispatch:  # Añade este disparador manual
+
 name: 🚀 Deploy PHP Application on Push
 
 jobs:
@@ -39,4 +40,3 @@ jobs:
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
         local-dir: ./
-        # Asegúrate de que la ruta esté correcta y que la carpeta exista en tu repositorio
